@@ -1,0 +1,69 @@
+{
+  "expo": {
+    "name": "pipyrit",
+    "slug": "pipyrit",
+    "version": "1.2.34",
+    "orientation": "portrait",
+    "icon": "./assets/pipyritlogo.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/pipyritlogo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.smartsoftware.sas"
+    },
+    "android": {
+      "versionCode": 139,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "useNextNotificationsApi": true,
+      "package": "com.sparktech.tikafood",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyC4fsrgciACjhUacg9umvRHflrJJHFovdY"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "kotlinVersion": "1.9.24",
+            "composeCompilerVersion": "1.5.14"
+          }
+        }
+      ],
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a26188a5-d595-41b2-b2fb-ff7953f64a2d"
+      }
+    }
+  }
+}
