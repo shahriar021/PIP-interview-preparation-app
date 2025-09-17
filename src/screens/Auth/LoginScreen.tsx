@@ -3,24 +3,19 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Image,
   useWindowDimensions,
   Alert,
   ScrollView,
-  KeyboardAvoidingView,
-  Platform,
 } from "react-native";
-import React, { useState } from "react";
-import { Entypo, Feather, FontAwesome } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
+import React, { useLayoutEffect, useState } from "react";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { setToken, setUser, setUserType } from "src/redux/features/auth/authSlice";
 import { useLoginMutation } from "src/redux/features/auth/authApi";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
-import SignUpRider from "./SignUpRider";
-import SignUpUser from "./SignUpUser";
+import Button from "src/components/shared/Button";
 
 const LoginScreen = () => {
   const { height, width } = useWindowDimensions();
@@ -35,18 +30,37 @@ const LoginScreen = () => {
 
   const navigation = useNavigation()
 
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: "Log In",
+      headerTintColor: "#305FA1",
+      headerStyle: {
+        elevation: 0,
+        borderBottomWidth: 0,
+        shadowOpacity: 0,
+        backgroundColor: 'white'
+      },
+      headerLeft: () => (
+        <TouchableOpacity className="bg-[#1D35571A] p-1 m-1 rounded-full justify-center items-center">
+          <Ionicons name="arrow-back-sharp" size={24} color="black" />
+        </TouchableOpacity>
+      )
+    })
+  }, [navigation])
+
   const dispatch = useDispatch();
 
   const handleLogin = async () => {
-     if (email == "" && password == "") {
-      Alert.alert("Please fill up the fields!!")
-      return ;
-     }
+    //  if (email == "" && password == "") {
+    //   Alert.alert("Please fill up the fields!!")
+    //   return ;
+    //  }
 
-    const normalizedEmail = email.trim().toLowerCase();
-    const type = normalizedEmail === "user@gmail.com" ? "user" : "rider";
-    dispatch(setToken(true))
-    dispatch(setUserType(type))
+    // const normalizedEmail = email.trim().toLowerCase();
+    // const type = normalizedEmail === "user@gmail.com" ? "user" : "rider";
+    // dispatch(setToken(true))
+    // dispatch(setUserType(type))
+    console.log('i am clicking up')
   };
   const [fontsLoaded] = useFonts({
     'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),
@@ -60,104 +74,55 @@ const LoginScreen = () => {
 
 
   return (
-    <SafeAreaView className="flex-1 bg-[#B42315] items-center">
-
-      {/* Your whole view content here */}
-      <View style={{ width: width * 0.5, height: height * 0.3 }} className="items-center">
-        <Image source={require("../../../assets/tika.png")} style={{ width: "100%", height: "100%" }} resizeMode="contain" />
-      </View>
-      <ScrollView contentContainerStyle={{
-        flexGrow: 1,
-        backgroundColor: "white",
-        borderRadius: 50
-      }}>
-        <View className="relative flex-1 w-full  rounded-tr-2xl rounded-tl-2xl bg-white items-center p-4">
-          <View className=" mt-5 flex-row border border-gray-200 rounded-full overflow-hidden w-full p-1">
-            <TouchableOpacity className={`flex-1 rounded-full items-center p-3 ${isSignIn ? "bg-[#C21A1E]" : " bg-white"}`} onPress={() => setIsSignIn(true)}>
-              <Text className={`${isSignIn ? "text-white" : "text-red-500"}`}>Sign In</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className={`flex-1 rounded-full items-center p-3  ${isSignIn ? "bg-white" : " bg-[#C21A1E]"}`} onPress={() => {
-              setRoleOff(true)
-              setIsSignIn(false)
-            }}>
-              <Text className={`${isSignIn ? "text-red-500" : "text-white"}`}>Sign Up</Text>
-            </TouchableOpacity>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff065', }}>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 20,backgroundColor:"red" }}>
+        <View style={{}}>
+          <View>
+            <Text style={{ color: "#33363F", fontSize: 24, fontWeight: "bold" }}>Hi, Welcome back!</Text>
+            <Text style={{ color: "#626262", fontSize: 16 }}>Sign in to continue exploring the best deals</Text>
           </View>
-          {/* sign in */}
-          {isSignIn ?
-            <View className="mt-4 flex-1 w-full ">
-              <Text className="font-robotoBold text-2xl text-left mb-2">Hi, Welcome back!</Text>
-              <Text className="mb-2">Sigin in to continue exploring the best deals</Text>
 
-              <Text className="mt-1 mb-1">Email</Text>
-              <TextInput className="border rounded-xl mt-1 border-gray-300 mb-1 p-3" onChangeText={setEmail} />
-
-              <Text className="mt-1 mb-1">Password</Text>
-              {/* <View className="flex-row border border-gray-300 rounded-xl items-center px-3">
-              <TextInput className="flex-1 py-3" secureTextEntry/>
-              <Text><Feather name="eye-off" size={24} color="gray" /></Text>
-            </View> */}
-              <View className="flex-row border border-gray-300 rounded-xl items-center px-3">
-                <TextInput
-                  className="flex-1 py-3"
-                  secureTextEntry={!showPassword}
-                  onChangeText={setPassword}
-
-                // add your other props like value, onChangeText here
-                />
-                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                  <Feather
-                    name={showPassword ? "eye" : "eye-off"}
-                    size={24}
-                    color="gray"
-                  />
-                </TouchableOpacity>
-              </View>
-              <View className="mt-3 flex-row items-center justify-between">
-                <View className="flex-row items-center gap-2">
-                  <TouchableOpacity onPress={() => setIsRemeber(!isRemember)}>
-                    {!isRemember ? <Entypo name="circle" size={24} color="gray" />
-                      : <FontAwesome name="circle" size={24} color="black" />}
-                  </TouchableOpacity>
-                  <Text>Remember Me</Text>
-                </View>
-                <TouchableOpacity onPress={() => navigation.navigate("Forget Password")}>
-                  <Text className="text-red-700">Forget Password?</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View className="items-center">
-                <TouchableOpacity className=" items-center mt-3 rounded-full  overflow-hidden" style={{ width: width * 0.9 }} onPress={handleLogin}>
-                  <LinearGradient colors={["#DD0F14", "#C21A1E"]} style={{ width, borderRadius: 999, alignItems: "center" }}>
-                    <Text className="text-white p-3 ">Sign In</Text>
-                  </LinearGradient>
-                </TouchableOpacity>
-              </View>
-              <View className="flex-row mt-3 justify-center gap-3 items-center">
-                <View className="h-[1px] flex-1 bg-gray-400" />
-                <Text>or</Text>
-                <View className="h-[1px] flex-1 bg-gray-400" />
-              </View>
-
-              <View className="flex-row items-center justify-center gap-2 mt-3">
-                <Image source={require("../../../assets/restroIcon/google.png")} className="w-10 h-10" />
-                <Image source={require("../../../assets/restroIcon/apple.png")} className="w-10 h-10" />
+          <View className="mt-10">
+            <View className="mt-2 mb-2">
+              <Text className="font-robotoBold text-[#626262] mb-2">Email</Text>
+              <View className="w-full border border-[#CACACA] rounded-xl">
+                <TextInput className="flex-1 p-3" placeholder="Your E-mail" />
               </View>
             </View>
-            :
-            isUser == "user" ?
-              <SignUpUser isUser={isUser} setIsUser={setIsUser} roleOff={roleOff} isSignIn={isSignIn} setIsSignIn={setIsSignIn} handleVerify={handleVerify} setRoleOff={setRoleOff} />
-              :
-              <SignUpRider isUser={isUser} setIsUser={setIsUser} roleOff={roleOff} isSignIn={isSignIn} setIsSignIn={setIsSignIn} handleVerify={handleVerify} setRoleOff={setRoleOff} />
-          }
-          {/* role */}
-         
+
+            <View className="mt-2 mb-2">
+              <Text className="font-robotoBold text-[#626262] mb-2">Password</Text>
+              <View className="flex-row items-center px-2 w-full border border-[#CACACA] rounded-xl">
+                <TextInput className="flex-1 p-3" placeholder="Your Password" />
+                <Feather name="eye" size={24} color="#858585" />
+              </View>
+            </View>
+
+            <View className="flex-row justify-between mt-2 mb-2">
+              <Text className="text-[#33363F]">Remember Me</Text>
+              <Text className="text-[#FF503C]">Forget Password ?</Text>
+            </View>
+            
+          </View>
+          <Button
+            title={"Log In"}
+            colors={["#1C75AD", "#083D70"]}
+            labelSize={14}
+            labelFont={'roboto-Bold'}
+            labelColor={'white'}
+            onPress={handleLogin}
+          />
+          <View className="flex-row justify-center gat-2 mt-2 mb-2">
+              <Text className="text-[#33363F]">Don’t have an account?</Text>
+              <Text className="text-[#1C75AD]">Sign Up</Text>
+            </View>
         </View>
       </ScrollView>
-
     </SafeAreaView>
   );
 };
+
+
 
 export default LoginScreen;
 

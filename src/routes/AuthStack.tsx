@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 const AuthStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Login" options={{headerShown:true}} component={LoginScreen} />
       <Stack.Screen options={{headerShown:true}}  name="Forget Password" component={ForgetPassword}/>
       <Stack.Screen options={{headerShown:true}}  name="Login OTP" component={LoginOTPScreen}/>
       <Stack.Screen options={{headerShown:true}}  name="Reset Password" component={ResetPassword}/>
