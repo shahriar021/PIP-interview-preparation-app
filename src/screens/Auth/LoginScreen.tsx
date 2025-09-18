@@ -34,17 +34,17 @@ const LoginScreen = () => {
     navigation.setOptions({
       headerTitle: "Log In",
       headerTintColor: "#305FA1",
+      headerTitleStyle:{
+        fontFamily:'opens-sans',
+        fontWeight:'bold'
+      },
       headerStyle: {
         elevation: 0,
         borderBottomWidth: 0,
         shadowOpacity: 0,
         backgroundColor: 'white'
       },
-      headerLeft: () => (
-        <TouchableOpacity className="bg-[#1D35571A] p-1 m-1 rounded-full justify-center items-center">
-          <Ionicons name="arrow-back-sharp" size={24} color="black" />
-        </TouchableOpacity>
-      )
+      headerLeft:null
     })
   }, [navigation])
 
@@ -74,8 +74,8 @@ const LoginScreen = () => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff065', }}>
-      <ScrollView contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 20,backgroundColor:"red" }}>
+    <View style={{ flex: 1, backgroundColor: '#fff', }}>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 20 }}>
         <View style={{}}>
           <View>
             <Text style={{ color: "#33363F", fontSize: 24, fontWeight: "bold" }}>Hi, Welcome back!</Text>
@@ -100,7 +100,7 @@ const LoginScreen = () => {
 
             <View className="flex-row justify-between mt-2 mb-2">
               <Text className="text-[#33363F]">Remember Me</Text>
-              <Text className="text-[#FF503C]">Forget Password ?</Text>
+              <TouchableOpacity onPress={()=>navigation.navigate("Forget Password")}><Text className="text-[#FF503C]">Forget Password ?</Text></TouchableOpacity>
             </View>
             
           </View>
@@ -112,13 +112,13 @@ const LoginScreen = () => {
             labelColor={'white'}
             onPress={handleLogin}
           />
-          <View className="flex-row justify-center gat-2 mt-2 mb-2">
+          <TouchableOpacity className="flex-row justify-center gat-2 mt-2 mb-2" onPress={()=>navigation.navigate("Sign Up")}>
               <Text className="text-[#33363F]">Don’t have an account?</Text>
               <Text className="text-[#1C75AD]">Sign Up</Text>
-            </View>
+            </TouchableOpacity>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

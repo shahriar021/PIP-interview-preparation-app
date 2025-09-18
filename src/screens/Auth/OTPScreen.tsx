@@ -1,8 +1,8 @@
-import { Entypo } from '@expo/vector-icons';
+import {  Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { LinearGradient } from 'expo-linear-gradient';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import Button from 'src/components/shared/Button';
 
 const OTPScreen = () => {
   const { width, height } = useWindowDimensions();
@@ -23,8 +23,6 @@ const OTPScreen = () => {
     }
   };
 
-  console.log(otpNumbers.join(""))
-
   const handleKeyPress = (e: any, index: any) => {
     if (e.nativeEvent.key === 'Backspace' && otpNumbers[index] === '' && index > 0) {
       inputRefs.current[index - 1]?.focus();
@@ -33,24 +31,24 @@ const OTPScreen = () => {
 
   const handleVerify = () => {
     const code = otpNumbers.join('');
-    navigation.navigate("Verification Page" as never);
+    navigation.navigate("Reset Password" as never);
   };
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Verify your email",
+      title: "OTP Verification",
       headerStyle: {
         backgroundColor: "white",
         elevation: 0, // for Android
         shadowOpacity: 0, // for iOS
         borderBottomWidth: 0, // for iOS
       },
-      headerTintColor: "black",
+      headerTintColor: "#305FA1",
       headerTitleAlign: "center",
       headerLeft: () => (
         <TouchableOpacity className='p-1' onPress={() => navigation.goBack()}>
-          <View className='w-[35px] h-[35px] border border-red-100 items-center justify-center rounded-full'>
-            <Entypo name="chevron-small-left" size={24} color="red" />
+          <View className='w-[35px] h-[35px]  bg-[#1D35571A] items-center justify-center rounded-full'>
+            <Ionicons name="arrow-back-sharp" size={24} color="#2F2F36" />
           </View>
         </TouchableOpacity>
       )
@@ -58,10 +56,11 @@ const OTPScreen = () => {
   }, [navigation]);
 
   return (
-    <View className='flex-1 items-center justify-center bg-white'>
-      <Text className='font-robotoBold text-xl mb-2'>Enter OTP</Text>
+    <View className='flex-1 items-center justify-start  bg-white p-3'>
+      <Text className='font-robotoBold text-xl mb-5 text-[#4D4D55]'>Verify Your Identity
+      </Text>
       <Text className='text-center text-gray-500'>
-        {` We have just sent you a 4-digit code \n via your email.`}
+        {` For your security, verify the code sent to your registered contact. Let’s confirm it’s you!`}
       </Text>
 
       <View className='flex-row gap-5 mt-3 mb-2'>
@@ -73,29 +72,23 @@ const OTPScreen = () => {
             onKeyPress={(e) => handleKeyPress(e, index)}
             maxLength={1}
             keyboardType='numeric'
-            className='border p-1 rounded-lg border-red-600 text-2xl text-red-600 text-center font-bold'
+            className='border p-1 rounded-lg border-[#CACACA] text-2xl text-red-600 text-center font-bold'
             style={{ width: width * 0.15, height: height * 0.06 }}
           />
         ))}
       </View>
 
-      <View className="items-center mb-2">
-        <TouchableOpacity
-          className="items-center mt-3 rounded-full overflow-hidden"
-          style={{ width: width * 0.9 }}
+      <Button
+          title={"Confirm"}
+          colors={["#1C75AD", "#083D70"]}
+          labelSize={14}
+          labelFont={'roboto-Bold'}
+          labelColor={'white'}
           onPress={handleVerify}
-        >
-          <LinearGradient
-            colors={["#DD0F14", "#C21A1E"]}
-            style={{ width, borderRadius: 999, alignItems: "center" }}
-          >
-            <Text className="text-white p-3">Verify</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
+        />
 
       <Text className='text-gray-500'>
-        Didn't receive code?<Text className='text-red-800'> Resend Code</Text>
+        Resend Code <Text>{" "}53{" "}</Text>s
       </Text>
     </View>
   );

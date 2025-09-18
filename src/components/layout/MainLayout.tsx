@@ -18,7 +18,9 @@ const MainLayout = () => {
     'DMSans-Bold':require('../../../assets/fonts/DMSans-Bold.ttf'),
     'interBold':require('../../../assets/fonts/Inter_18pt-Bold.ttf'),
     'urbanist-Bold':require('../../../assets/fonts/Urbanist-Bold.ttf'),
-    'urbanist-Regular':require('../../../assets/fonts/Urbanist-Regular.ttf')
+    'urbanist-Regular':require('../../../assets/fonts/Urbanist-Regular.ttf'),
+
+    'open-sans':require('../../../assets/fonts/OpenSans-Bold.ttf')
   });
 
   if (!fontsLoaded) return null;

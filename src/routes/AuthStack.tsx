@@ -4,9 +4,10 @@ import LoginScreen from "src/screens/Auth/LoginScreen";
 import OTPScreen from "src/screens/Auth/OTPScreen";
 import VerifyEmailPage from "src/screens/Auth/VerifyEmailPage";
 import ForgetPassword from 'src/screens/Auth/ForgetPassword';
-import LoginOTPScreen from 'src/screens/Auth/LoginOTPScreen';
 import ResetPassword from 'src/screens/Auth/ResetPasswrod';
 import VerificationPage from 'src/screens/Auth/VerificationPage';
+import SignUp from 'src/screens/Auth/SignUp';
+import SignUpOTPScreen from 'src/screens/Auth/SignUpOTPScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,11 +16,12 @@ const AuthStack = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" options={{headerShown:true}} component={LoginScreen} />
       <Stack.Screen options={{headerShown:true}}  name="Forget Password" component={ForgetPassword}/>
-      <Stack.Screen options={{headerShown:true}}  name="Login OTP" component={LoginOTPScreen}/>
+      <Stack.Screen options={{headerShown:true}}  name="Sign OTP" component={SignUpOTPScreen}/>
       <Stack.Screen options={{headerShown:true}}  name="Reset Password" component={ResetPassword}/>
       <Stack.Screen options={{ headerShown: true }} name="VerifyEmail" component={VerifyEmailPage} />
       <Stack.Screen options={{headerShown:true}} name="OTP Screen" component={OTPScreen} />
       <Stack.Screen options={{headerShown:true}} name="Verification Page" component={VerificationPage}/>
+      <Stack.Screen options={{headerShown:true}} name="Sign Up" component={SignUp}/>
     </Stack.Navigator>
   );
 };

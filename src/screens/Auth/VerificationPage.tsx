@@ -1,51 +1,62 @@
 import { View, Text, TouchableOpacity, Image, useWindowDimensions } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 import { scale, verticalScale } from 'react-native-size-matters';
+import Button from 'src/components/shared/Button';
 
 const VerificationPage = () => {
-    const {width}=useWindowDimensions()
-    const navigation = useNavigation();
+  const { width } = useWindowDimensions()
+  const navigation = useNavigation();
 
-    useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Verification",
-      headerStyle: {
-        backgroundColor: "white",
-        elevation: 0, // for Android
-        shadowOpacity: 0, // for iOS
-        borderBottomWidth: 0, // for iOS
+      headerTitle: "Create Account",
+      headerTintColor: "#305FA1",
+      headerTitleStyle: {
+        fontFamily: 'opens-sans',
+        fontWeight: 'bold'
       },
-      headerTintColor: "#626262",
-      headerTitleAlign: "center",
+      headerStyle: {
+        elevation: 0,
+        borderBottomWidth: 0,
+        shadowOpacity: 0,
+        backgroundColor: 'white'
+      },
       headerLeft: () => (
-        <TouchableOpacity className='p-1' onPress={() => navigation.goBack()}>
-          <View className='w-[35px] h-[35px] border border-red-100 items-center justify-center rounded-full'>
-            <Entypo name="chevron-small-left" size={24} color="red" />
-          </View>
+        <TouchableOpacity className="bg-[#1D35571A] p-1 m-1 rounded-full justify-center items-center">
+          <Ionicons name="arrow-back-sharp" size={24} color="black" />
         </TouchableOpacity>
       )
-    });
-  }, [navigation]);
+    })
+  }, [navigation])
+
+  const handleVerify=()=>{
+    navigation.navigate("Sign OTP")
+  }
 
   return (
-    <View className='flex-1 bg-white items-center p-2 relative'>
-        {/*  */}
-        <View style={{width:width*0.9,height:verticalScale(300)}}>
-        <Image source={require("../../../assets/restroIcon/verificaiton.png")} style={{width:"100%",height:"100%"}} resizeMode='contain'/>
-      </View>
-      <View className='items-center' >
-        <Text className='text-[#28A15C] font-robotoBold text-2xl'>Your application is under review</Text>
-        <Text  className='text-center font-robotoRegular text-xl'>We will notify you as soon as your account has been approved
-        </Text>
-      </View>
-      {/*  */}
-      <View style={{ height: verticalScale(50) }} />
+    <View className='flex-1 bg-white p-3'>
 
-      <View style={{width:width,height:verticalScale(200)}} className='absolute bottom-0  ' >
-        <Image source={require("../../../assets/restroIcon/Vector.png")} style={{width:"100%",height:"100%"}} resizeMode='stretch'/>
+      <View className='border border-[#CACACA] rounded-lg p-5 flex-row items-center gap-5 mb-5'>
+        <View style={{ width: 80, height: 80, borderRadius: 100, overflow: 'hidden', alignItems: "center", justifyContent: "center", backgroundColor: "#1D35571A" }}>
+          <Ionicons name="mail" size={24} color="#1A85EA" />
+        </View>
+
+        <View>
+          <Text className='text-[#4D4D55] text-sm'>via Email:</Text>
+          <Text className='text-[#2F2F36] text-xl mt-2 mb-2'>and***ley@yourdomain.com</Text>
+        </View>
       </View>
+
+       <Button
+        title={"Continue"}
+        colors={["#1C75AD", "#083D70"]}
+        labelSize={14}
+        labelFont={'roboto-Bold'}
+        labelColor={'white'}
+        onPress={handleVerify}
+      />
     </View>
   )
 }
