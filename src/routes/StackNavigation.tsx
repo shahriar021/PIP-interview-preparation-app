@@ -23,7 +23,6 @@ import {
   SpecialInstructions,
   DeliveryRequestView,
   MapScreen,
-  EarningListView,
   Withdraw,
   WithdrawRequest,
   Bank,
@@ -31,13 +30,18 @@ import {
   History
 } from "src/screens";
 
-import { RiderBottomNavigation } from "./RiderBottomNavigation";
 import { ActivityIndicator } from "react-native";
 import { useAppSelector } from "src/redux/hooks";
 import AvailableRequest from "src/screens/Request/AvailableRequest";
 import CouponCards from "src/screens/Profile/CouponCards";
 import ViewMyComplain from "src/screens/Profile/ViewMyComplain/ViewMyComplain";
 import Report from "src/screens/Profile/Report/Report";
+import NewCase from "src/screens/Case/NewCase";
+import CaseType from "src/screens/Case/CaseType";
+import CaseDetails from "src/screens/Case/CaseDetails";
+import CaseDetailsCreate from "src/screens/Case/CaseDetailsCreate";
+import CaseDetailsEdit from "src/screens/Case/CaseDetailsEdit";
+import FrameShorts from "src/screens/Frames/FrameShorts";
 
 
 const Stack = createStackNavigator();
@@ -109,6 +113,14 @@ const StackNavigation = () => {
         <Stack.Screen name="Coupon Cards" component={CouponCards}/>
         <Stack.Screen name="View My Complains" component={ViewMyComplain}/>
         <Stack.Screen name="Report" component={Report}/>
+
+        {/*  */}
+        <Stack.Screen name="New Case" options={{headerShown:true}} component={NewCase}/>
+        <Stack.Screen name="Case Type" options={{headerShown:true}} component={CaseType}/>
+        <Stack.Screen name="Case Details create" options={{headerShown:true}} component={CaseDetailsCreate}/>
+        <Stack.Screen name="Case Details edit" options={{headerShown:true}} component={CaseDetailsEdit}/>
+        <Stack.Screen name="Case Details" options={{headerShown:true}} component={CaseDetails}/>
+        <Stack.Screen name="Frame Shorts" options={{headerShown:false}} component={FrameShorts}/>
       </Stack.Navigator>
     // </NavigationContainer>
   );
