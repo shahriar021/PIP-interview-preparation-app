@@ -1,11 +1,12 @@
-import { View, Text, useWindowDimensions, TouchableOpacity } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import { View, Text, useWindowDimensions, TouchableOpacity, ScrollView, Image } from 'react-native'
+import React, { useLayoutEffect, useState } from 'react'
 import Video from 'react-native-video';
 import { useNavigation } from '@react-navigation/native';
+import { verticalScale } from 'react-native-size-matters';
 
 const Frames = () => {
     const navigation = useNavigation()
-    const {height}=useWindowDimensions()
+    const { height } = useWindowDimensions()
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -20,20 +21,30 @@ const Frames = () => {
                 borderBottomWidth: 0,
             },
             headerTintColor: "#305FA1",
-            headerTitleAlign: "center",
+            headerTitleAlign: "left",
 
 
             headerLeft: null
 
         });
     }, [navigation]);
-  return (
-    <View className='flex-1 items-center justify-center bg-white'>
-     <TouchableOpacity className='items-center justify-center w-full' onPress={()=>navigation.navigate("Frame Shorts")}>
-        <Text>touch</Text>
-     </TouchableOpacity>
-    </View>
-  )
+
+    const [videoArray] = useState(Array.from({ length: 20 }, (_, i) => i + 1))
+
+    return (
+        <View className='flex-1 items-center justify-center bg-white p-3'>
+
+
+            <ScrollView>
+                <View className='flex-row flex-wrap gap-2'>
+                    {videoArray.map(item => <TouchableOpacity style={{ width: "49%", height: verticalScale(247), borderRadius: 9, overflow: "hidden",position:'relative' }} onPress={() => navigation.navigate("Frame Shorts")}>
+                        <Image source={require("../../../assets/pipyrit/framesImage.png")} style={{ width: "100%", height: "100%" }} />
+                            <Text className='absolute bottom-2 m-2 text-white font-robotoRegular'>Top Mistakes to Avoid in the Marriage Interview</Text>
+                    </TouchableOpacity>)}
+                </View>
+            </ScrollView>
+        </View>
+    )
 }
 
 export default Frames

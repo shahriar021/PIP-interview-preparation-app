@@ -42,6 +42,13 @@ import CaseDetails from "src/screens/Case/CaseDetails";
 import CaseDetailsCreate from "src/screens/Case/CaseDetailsCreate";
 import CaseDetailsEdit from "src/screens/Case/CaseDetailsEdit";
 import FrameShorts from "src/screens/Frames/FrameShorts";
+import QuickQuiz1 from "src/screens/Preparation/QuickQuiz1";
+import QuickQuiz2 from "src/screens/Preparation/QuickQuiz2";
+import QuickQuiz3 from "src/screens/Preparation/QuickQuiz3";
+import QuickResult from "src/screens/Preparation/QuickResult";
+import QuestionAndAnswer from "src/screens/Preparation/QuestionAndAnswer";
+import InterviewType from "src/screens/Preparation/InterviewType";
+import InterviewDifficulty from "src/screens/Preparation/InterviewDifficulty";
 
 
 const Stack = createStackNavigator();
@@ -121,6 +128,13 @@ const StackNavigation = () => {
         <Stack.Screen name="Case Details edit" options={{headerShown:true}} component={CaseDetailsEdit}/>
         <Stack.Screen name="Case Details" options={{headerShown:true}} component={CaseDetails}/>
         <Stack.Screen name="Frame Shorts" options={{headerShown:false}} component={FrameShorts}/>
+        <Stack.Screen name="Quick 1" options={{headerShown:false}} component={QuickQuiz1}/>
+        <Stack.Screen name="Quick 2" options={{headerShown:false}} component={QuickQuiz2}/>
+        <Stack.Screen name="Quick 3" options={{headerShown:false}} component={QuickQuiz3}/>
+        <Stack.Screen name="Quick Result" options={{headerShown:true}} component={QuickResult}/>
+        <Stack.Screen name="Quick Answer" options={{headerShown:true}} component={QuestionAndAnswer}/>
+        <Stack.Screen name="Interview Type" options={{headerShown:true}} component={InterviewType}/>
+        <Stack.Screen name="Interview Difficulty" options={{headerShown:true}} component={InterviewDifficulty}/>
       </Stack.Navigator>
     // </NavigationContainer>
   );

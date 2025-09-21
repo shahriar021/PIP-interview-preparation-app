@@ -6,6 +6,7 @@ import CartPage from "src/screens/Cart/CartPage";
 import MyOrders from "src/screens/Orders/MyOrders";
 import { scale, verticalScale } from "react-native-size-matters";
 import Frames from "src/screens/Frames/Frames";
+import Preparation from "src/screens/Preparation/Preparation";
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -27,7 +28,7 @@ const icons = {
 
 export const BottomNavigation = () => {
   const { width } = useWindowDimensions();
-  const TAB_NAMES = ["Home", "Cart", "My Orders", "Profile"];
+  const TAB_NAMES = ["Home", "Prep Hub", "My Orders", "Profile"];
 
   // optional: prefetch icons into memory so no delay
   useEffect(() => {
@@ -62,7 +63,7 @@ export const BottomNavigation = () => {
             let iconSource;
             if (route.name === "Home") {
               iconSource = focused ? icons.homeActive : icons.homeInactive;
-            } else if (route.name === "Cart") {
+            } else if (route.name === "Prep Hub") {
               iconSource = focused ? icons.prepActive : icons.prepInactive;
             } else if (route.name === "Frames") {
               iconSource = focused ? icons.pActive : icons.playInactive;
@@ -111,7 +112,7 @@ export const BottomNavigation = () => {
       }}
     >
       <BottomTabs.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
-      <BottomTabs.Screen name="Cart" component={CartPage} />
+      <BottomTabs.Screen name="Prep Hub" options={{ headerShown: true }} component={Preparation} />
       <BottomTabs.Screen name="Frames" options={{ headerShown: true }} component={Frames} />
       <BottomTabs.Screen name="Profile" options={{ headerShown: false }} component={Profile} />
     </BottomTabs.Navigator>
