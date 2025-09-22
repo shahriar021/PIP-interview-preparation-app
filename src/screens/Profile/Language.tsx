@@ -1,13 +1,14 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
-const InterviewType = () => {
+const Language = () => {
+    const [langList] = useState(Array.from({ length: 10 }, (_, i) => i + 1));
     const navigation = useNavigation()
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Interview Type",
+            title: "Language",
             headerTitleStyle: {
                 fontFamily: 'open-sans',
             },
@@ -19,32 +20,26 @@ const InterviewType = () => {
             },
             headerTintColor: "#305FA1",
             headerTitleAlign: "left",
-
-
             headerLeft: () => (
-                <TouchableOpacity className='p-1' onPress={() => navigation.navigate("BottomScreen",{screen:"Prep Hub"})}>
+                <TouchableOpacity className='p-1' onPress={() => navigation.navigate("Setting")}>
                     <View className='w-[35px] h-[35px]  bg-[#1D35571A] items-center justify-center rounded-full'>
                         <Ionicons name="arrow-back-sharp" size={24} color="black" />
                     </View>
                 </TouchableOpacity>
             )
-
         });
-
-        
     }, [navigation]);
-
-    const [caseArray] = useState(["Marriage", "Asylum", "Citizenship", "Green Card"])
     return (
         <View className='flex-1 bg-white p-3'>
-            <Text className='text-[#33363F] font-robotoBold text-4xl'>Choose Interview Type</Text>
-            <View className='flex-col gap-3 mt-4 mb-2'>
-                {caseArray.map((item) => <TouchableOpacity key={item} style={{ backgroundColor: 'rgba(0,0,0,0.05)' }} className='p-4 rounded-xl border border-gray-300' onPress={()=>navigation.navigate("Interview Difficulty")}>
-                    <Text className='font-robotoBold text-lg'>{item}</Text>
-                </TouchableOpacity>)}
-            </View>
+            <ScrollView contentContainerStyle={{}}>
+            {langList.map(item => <View className='flex-row items-center gap-4 border  border-gray-300 p-3 rounded-xl mt-2 mb-2'>
+                {item==1?<FontAwesome name="dot-circle-o" size={24} color="#94AF29" />:<FontAwesome name="dot-circle-o" size={24} color="black" />}
+                <Text className='font-robotoBold text-lg'>English</Text>
+            </View>)}
+
+            </ScrollView>
         </View>
     )
 }
 
-export default InterviewType
+export default Language

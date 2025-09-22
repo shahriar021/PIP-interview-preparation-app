@@ -49,6 +49,12 @@ import QuickResult from "src/screens/Preparation/QuickResult";
 import QuestionAndAnswer from "src/screens/Preparation/QuestionAndAnswer";
 import InterviewType from "src/screens/Preparation/InterviewType";
 import InterviewDifficulty from "src/screens/Preparation/InterviewDifficulty";
+import Interview1 from "src/screens/Preparation/Interview1";
+import Interview2 from "src/screens/Preparation/Interview2";
+import Interview3 from "src/screens/Preparation/Interview3";
+import InterviewResult from "src/screens/Preparation/InterviewResult";
+import InterviewQnA from "src/screens/Preparation/InterviewQandAns";
+import Language from "src/screens/Profile/Language";
 
 
 const Stack = createStackNavigator();
@@ -135,6 +141,12 @@ const StackNavigation = () => {
         <Stack.Screen name="Quick Answer" options={{headerShown:true}} component={QuestionAndAnswer}/>
         <Stack.Screen name="Interview Type" options={{headerShown:true}} component={InterviewType}/>
         <Stack.Screen name="Interview Difficulty" options={{headerShown:true}} component={InterviewDifficulty}/>
+        <Stack.Screen name="Interview 1" options={{headerShown:false}} component={Interview1}/>
+        <Stack.Screen name="Interview 2" options={{headerShown:false}} component={Interview2}/>
+        <Stack.Screen name="Interview 3" options={{headerShown:false}} component={Interview3}/>
+        <Stack.Screen name="Interview Result" options={{headerShown:true}} component={InterviewResult}/>
+        <Stack.Screen name="Interview QnA" options={{headerShown:true}} component={InterviewQnA}/>
+        <Stack.Screen name="Language" options={{headerShown:true}} component={Language}/>
       </Stack.Navigator>
     // </NavigationContainer>
   );

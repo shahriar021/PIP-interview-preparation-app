@@ -1,40 +1,23 @@
 export const profileItems = [
   {
+    icon: require("../../assets/pipyrit/Edit_duotone_line.png"),
+    label: "Edit Profile Details",
+    route:"Edit Profile",
+    type:['user','rider']
+  },
+  {
     icon: require("../../assets/restroIcon/setting.png"),
     label: "Settings",
     route:"Setting",
     type:['user','rider']
   },
   {
-    icon: require("../../assets/restroIcon/location-03.png"),
-    label: "Address",
-    route:"Address",
-    type:'user'
+    icon: require("../../assets/restroIcon/Time_progress_duotone_line.png"),
+    label: "History",
+    route:"History",
+    type:'rider'
   },
-  {
-    icon: require("../../assets/restroIcon/location-03.png"),
-    label: "Coupon Cards",
-    route:"Coupon Cards",
-    type:'user'
-  },
-  {
-    icon: require("../../assets/restroIcon/location-03.png"),
-    label: "View My Complains",
-    route:"View My Complains",
-    type:'user'
-  },
-  {
-    icon: require("../../assets/restroIcon/location-03.png"),
-    label: "Report an Issue",
-    route:"Report",
-    type:'user'
-  },
-  {
-    icon: require("../../assets/restroIcon/Info_alt_light.png"),
-    label: "About Us",
-    route:"about",
-    type:['user','rider']
-  },
+  
   {
     icon: require("../../assets/restroIcon/Chield.png"),
     label: "Privacy Policy",
@@ -48,22 +31,10 @@ export const profileItems = [
     type:['user','rider']
   },
   {
-    icon: require("../../assets/restroIcon/Time_progress_duotone_line.png"),
-    label: "History",
-    route:"History",
-    type:'rider'
-  },
-  {
-    icon: require("../../assets/restroIcon/Server_light.png"),
-    label: "Withdraws",
-    route:"Withdraw",
-    type:'rider'
-  },
-  {
-    icon: require("../../assets/restroIcon/bank.png"),
-    label: "Bank Details",
-    route:"Bank",
-    type:'rider'
+    icon: require("../../assets/restroIcon/Info_alt_light.png"),
+    label: "About Us",
+    route:"about",
+    type:['user','rider']
   },
 ];
 

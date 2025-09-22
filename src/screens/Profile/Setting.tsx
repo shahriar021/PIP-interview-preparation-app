@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { Entypo } from '@expo/vector-icons'
+import { Entypo, Ionicons } from '@expo/vector-icons'
 import { settingItems } from 'src/constants/settingItems'
 
 const Setting = () => {
@@ -11,23 +11,26 @@ const Setting = () => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Settings",
-            headerStyle: { backgroundColor: "white" ,
-                elevation: 0, // for Android
-  shadowOpacity: 0, // for iOS
-  borderBottomWidth: 0, // for iOS
+            headerTitleStyle: {
+                fontFamily: 'open-sans',
             },
-            headerTintColor: "black",
-            headerTitleAlign: "center",
+            headerStyle: {
+                backgroundColor: "white",
+                elevation: 0,
+                shadowOpacity: 0,
+                borderBottomWidth: 0,
+            },
+            headerTintColor: "#305FA1",
+            headerTitleAlign: "left",
             headerLeft: () => (
-                <TouchableOpacity className='p-1' onPress={() => navigation.goBack()}>
-                    <View className='w-[35px] h-[35px] border border-red-100 items-center justify-center rounded-full' >
-                        <Entypo name="chevron-small-left" size={24} color="red" />
+                <TouchableOpacity className='p-1' onPress={() => navigation.navigate("BottomScreen", { screen: "Profile" })}>
+                    <View className='w-[35px] h-[35px]  bg-[#1D35571A] items-center justify-center rounded-full'>
+                        <Ionicons name="arrow-back-sharp" size={24} color="black" />
                     </View>
                 </TouchableOpacity>
             )
-        })
-    }, [navigation])
-
+        });
+    }, [navigation]);
     const handleDelete =()=>{
 
     }
