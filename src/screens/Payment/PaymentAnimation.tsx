@@ -27,7 +27,7 @@ const PaymentAnimation = () => {
                 easing="ease-out"
             >
                 <LinearGradient
-                    colors={['#3BE824', '#29BE15']}
+                    colors={['#305FA1', '#305FA1']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                     style={{
@@ -36,6 +36,8 @@ const PaymentAnimation = () => {
                         borderRadius: 50,
                         justifyContent: 'center',
                         alignItems: 'center',
+                        borderColor:"#305FA1",
+                        borderWidth:10
                     }}
                 >
                     <AntDesign name="check" size={24} color="white" />

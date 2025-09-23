@@ -23,11 +23,7 @@ const SignUp = ({ isSignIn, setIsSignIn }: any) => {
         shadowOpacity: 0,
         backgroundColor: 'white'
       },
-      headerLeft: () => (
-        <TouchableOpacity className="bg-[#1D35571A] p-1 m-1 rounded-full justify-center items-center">
-          <Ionicons name="arrow-back-sharp" size={24} color="black" />
-        </TouchableOpacity>
-      )
+      headerLeft: null
     })
   }, [navigation])
 

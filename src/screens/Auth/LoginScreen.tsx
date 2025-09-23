@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
-import { Feather, Ionicons } from "@expo/vector-icons";
+import { Entypo, Feather, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { setToken, setUser, setUserType } from "src/redux/features/auth/authSlice";
 import { useLoginMutation } from "src/redux/features/auth/authApi";
@@ -51,16 +51,12 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const handleLogin = async () => {
-    //  if (email == "" && password == "") {
-    //   Alert.alert("Please fill up the fields!!")
-    //   return ;
-    //  }
+     if (email == "" && password == "") {
+      Alert.alert("Please fill up the fields!!")
+      return ;
+     }
 
-    // const normalizedEmail = email.trim().toLowerCase();
-    // const type = normalizedEmail === "user@gmail.com" ? "user" : "rider";
-    // dispatch(setToken(true))
-    // dispatch(setUserType(type))
-    console.log('i am clicking up')
+    dispatch(setToken(true))
   };
   const [fontsLoaded] = useFonts({
     'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),
@@ -86,20 +82,24 @@ const LoginScreen = () => {
             <View className="mt-2 mb-2">
               <Text className="font-robotoBold text-[#626262] mb-2">Email</Text>
               <View className="w-full border border-[#CACACA] rounded-xl">
-                <TextInput className="flex-1 p-3" placeholder="Your E-mail" />
+                <TextInput className="flex-1 p-3" placeholder="Your E-mail" onChangeText={setEmail}/>
               </View>
             </View>
 
             <View className="mt-2 mb-2">
               <Text className="font-robotoBold text-[#626262] mb-2">Password</Text>
               <View className="flex-row items-center px-2 w-full border border-[#CACACA] rounded-xl">
-                <TextInput className="flex-1 p-3" placeholder="Your Password" />
+                <TextInput className="flex-1 p-3" placeholder="Your Password" onChangeText={setPassword}/>
                 <Feather name="eye" size={24} color="#858585" />
               </View>
             </View>
 
             <View className="flex-row justify-between mt-2 mb-2">
+             <TouchableOpacity className="flex-row items-center gap-2" onPress={()=>setIsRemeber(!isRemember)}>
+              {isRemember?<FontAwesome name="circle" size={24} color="gray" />
+               :<Entypo name="circle" size={24} color="black" />}
               <Text className="text-[#33363F]">Remember Me</Text>
+             </TouchableOpacity>
               <TouchableOpacity onPress={()=>navigation.navigate("Forget Password")}><Text className="text-[#FF503C]">Forget Password ?</Text></TouchableOpacity>
             </View>
             
@@ -114,7 +114,7 @@ const LoginScreen = () => {
           />
           <TouchableOpacity className="flex-row justify-center gat-2 mt-2 mb-2" onPress={()=>navigation.navigate("Sign Up")}>
               <Text className="text-[#33363F]">Don’t have an account?</Text>
-              <Text className="text-[#1C75AD]">Sign Up</Text>
+              <Text className="text-[#1C75AD] font-robotoBold">Sign Up</Text>
             </TouchableOpacity>
         </View>
       </ScrollView>

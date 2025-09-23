@@ -55,6 +55,9 @@ import Interview3 from "src/screens/Preparation/Interview3";
 import InterviewResult from "src/screens/Preparation/InterviewResult";
 import InterviewQnA from "src/screens/Preparation/InterviewQandAns";
 import Language from "src/screens/Profile/Language";
+import Subscription from "src/screens/Subscription/Subscription";
+import Payment from "src/screens/Subscription/Payment";
+import PaymentModal from "src/screens/Subscription/PaymentModal";
 
 
 const Stack = createStackNavigator();
@@ -107,8 +110,7 @@ const StackNavigation = () => {
         <Stack.Screen name="Restaurant Profile" options={{headerShown:false}} component={RestaurantProfile}/>
         <Stack.Screen name="Popular Items"  component={PopularItems}/>
         <Stack.Screen name="Popular Items Details" options={{headerShown:false}} component={PopularItemDetails}/>
-        <Stack.Screen name="Payment Animation" options={{headerShown:false}} component={PaymentAnimation}/>
-        <Stack.Screen name="Payment Info" options={{headerShown:false}} component={PaymentInfo}/>
+        
         <Stack.Screen name="Track Order" component={TrackOrder}/>
         <Stack.Screen name="View Details" component={ViewDetails}/>
         <Stack.Screen name="Payment Options" component={PaymentOption}/>
@@ -147,6 +149,11 @@ const StackNavigation = () => {
         <Stack.Screen name="Interview Result" options={{headerShown:true}} component={InterviewResult}/>
         <Stack.Screen name="Interview QnA" options={{headerShown:true}} component={InterviewQnA}/>
         <Stack.Screen name="Language" options={{headerShown:true}} component={Language}/>
+        <Stack.Screen name="Subscription" options={{headerShown:false}} component={Subscription}/>
+        <Stack.Screen name="Payment" options={{headerShown:true}} component={Payment}/>
+        <Stack.Screen name="Payment Animation" options={{headerShown:false}} component={PaymentAnimation}/>
+        <Stack.Screen name="Payment Info" options={{headerShown:true}} component={PaymentInfo}/>
+        <Stack.Screen name="Payment Card" options={{headerShown:true}} component={PaymentModal}/>
       </Stack.Navigator>
     // </NavigationContainer>
   );

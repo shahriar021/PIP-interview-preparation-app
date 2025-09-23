@@ -36,5 +36,11 @@ export const profileItems = [
     route:"about",
     type:['user','rider']
   },
+  {
+    icon: require("../../assets/restroIcon/Info_alt_light.png"),
+    label: "Subscription",
+    route:"Subscription",
+    type:['user','rider']
+  },
 ];
 

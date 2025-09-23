@@ -9,8 +9,8 @@ import { useAppSelector } from "src/redux/hooks";
 
 const MainLayout = () => {
   // const token = useAppSelector((state) => state.auth.user?.access_token);
-  // const token = useAppSelector((state)=>state.auth.token);
-  const token = 1;
+  const token = useAppSelector((state)=>state.auth.token);
+  // const token = 1;
 
   const [fontsLoaded] = useFonts({
     'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),

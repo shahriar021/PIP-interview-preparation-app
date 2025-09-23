@@ -45,7 +45,7 @@ const History = () => {
                 </TouchableOpacity>
             </View>
             <ScrollView contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
-                {hisList.map(i => <View className=' flex-row justify-between items-center border border-[#0000000D] rounded-2xl p-2  overflow-hidden mt-1 mb-2 gap-1 m-4' style={{ borderLeftColor: "#305FA1", borderLeftWidth: 4 }}>
+                {hisList.map(i => <View key={i} className=' flex-row justify-between items-center border border-[#0000000D] rounded-2xl p-2  overflow-hidden mt-1 mb-2 gap-1 m-4' style={{ borderLeftColor: "#305FA1", borderLeftWidth: 4 }}>
                     <View className='flex-col gap-1 py-3 flex-1'>
                         <Text className='text-[#000000] text-xl font-robotoBold' numberOfLines={1}>{isQuiz=="quiz"?"Quizze":"Interview"}</Text>
                         <Text className='text-[#33363F]' numberOfLines={1}>Result:<Text className='text-[#000000] font-robotoBold'>{" "}3/25</Text> </Text>

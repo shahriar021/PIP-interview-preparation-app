@@ -48,7 +48,7 @@ const Interview1 = () => {
             
             <ScrollView contentContainerStyle={{paddingBottom:150}} showsVerticalScrollIndicator={false}>
                 <View className='flex-col gap-3 mt-4 mb-2 p-3'>
-                {caseArray.map((item) => <TouchableOpacity key={item} style={{ backgroundColor: 'rgba(0,0,0,0.05)' }} className='p-4 rounded-xl border border-gray-300' onPress={() => navigation.navigate("Case Details create")}>
+                {caseArray.map((item) => <TouchableOpacity key={item} style={{ backgroundColor: 'rgba(0,0,0,0.05)' }} className='p-4 rounded-xl border border-gray-300' >
                     <Text className='font-robotoBold text-lg'>{item}</Text>
                 </TouchableOpacity>)}
             </View>

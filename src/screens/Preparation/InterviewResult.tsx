@@ -9,7 +9,7 @@ const InterviewResult = () => {
     const navigation = useNavigation()
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Quiz Result",
+            title: "Interview Result",
             headerTitleStyle: {
                 fontFamily: 'open-sans',
             },
@@ -58,7 +58,7 @@ const InterviewResult = () => {
                 <TouchableOpacity className='border border-[#1C75AD] p-3 rounded-full m-3 items-center' onPress={()=>navigation.navigate("Interview QnA")}>
                     <Text className='text-[#1C75AD] font-robotoRegular text-lg'>View All Question</Text>
                 </TouchableOpacity>
-                 <TouchableOpacity className='border border-[#1C75AD] p-3 rounded-full m-3 items-center flex-row justify-center gap-2'>
+                 <TouchableOpacity className='border border-[#1C75AD] p-3 rounded-full m-3 items-center flex-row justify-center gap-2' onPress={()=>navigation.navigate("BottomScreen",{screen:"Home"})}>
                     <Ionicons name="arrow-back-sharp" size={24} color="#1C75AD" />
                     <Text className='text-[#1C75AD] font-robotoRegular text-lg'>Back to Home</Text>
                 </TouchableOpacity>
