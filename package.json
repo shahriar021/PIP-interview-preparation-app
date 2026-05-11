@@ -61,14 +61,14 @@
     "react-native-version-check-expo": "^3.4.7",
     "react-native-video": "^6.16.1",
     "react-native-view-shot": "~4.0.3",
+    "react-native-vision-camera": "4",
     "react-native-web": "~0.19.13",
     "react-native-webrtc": "^124.0.5",
     "react-native-webview": "^13.13.5",
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
     "sonner-native": "^0.17.0",
-    "victory-native": "^37.3.6",
-    "react-native-vision-camera": "4"
+    "victory-native": "^37.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

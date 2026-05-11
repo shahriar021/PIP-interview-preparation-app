@@ -3,10 +3,13 @@ import React, { useLayoutEffect, useState } from 'react'
 import Video from 'react-native-video';
 import { useNavigation } from '@react-navigation/native';
 import { verticalScale } from 'react-native-size-matters';
+import { useGetAllVideosQuery } from 'src/redux/features/Frames/frameApi';
 
 const Frames = () => {
     const navigation = useNavigation()
     const { height } = useWindowDimensions()
+    const {data:getAllVideos}=useGetAllVideosQuery(undefined)
+    console.log(getAllVideos?.results)
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -37,9 +40,9 @@ const Frames = () => {
 
             <ScrollView>
                 <View className='flex-row flex-wrap gap-2'>
-                    {videoArray.map(item => <TouchableOpacity key={item} style={{ width: "49%", height: verticalScale(247), borderRadius: 9, overflow: "hidden",position:'relative' }} onPress={() => navigation.navigate("Frame Shorts")}>
-                        <Image source={require("../../../assets/pipyrit/framesImage.png")} style={{ width: "100%", height: "100%" }} />
-                            <Text className='absolute bottom-2 m-2 text-white font-robotoRegular'>Top Mistakes to Avoid in the Marriage Interview</Text>
+                    {getAllVideos?.results?.map(item => <TouchableOpacity key={item?.id} style={{ width: "49%", height: verticalScale(247), borderRadius: 9, overflow: "hidden",position:'relative' }} onPress={() => navigation.navigate("Frame Shorts")}>
+                        <Image source={{uri:item?.thumbnail}} style={{ width: "100%", height: "100%" }} />
+                            <Text className='absolute bottom-2 m-2 text-white font-robotoRegular'>{item?.description}</Text>
                     </TouchableOpacity>)}
                 </View>
             </ScrollView>
