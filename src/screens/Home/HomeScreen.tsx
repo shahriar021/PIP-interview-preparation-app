@@ -4,18 +4,19 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
-  Dimensions,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { Entypo } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { scale, verticalScale } from "react-native-size-matters";
-import { demoData } from "../Case/demo";
+import { useGetAllCaseQuery } from "src/redux/features/case/caseApi";
+import { Case } from "src/types/case";
 
 
 const DashboardScreen = ({ navigation }: { navigation: any }) => {
 
   const empty = 1
+  const {data:getCase}=useGetAllCaseQuery(undefined)
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -55,11 +56,11 @@ const DashboardScreen = ({ navigation }: { navigation: any }) => {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 150 }}>
         <View className="flex-col gap-2 p-3">
           {
-            demoData.map((item,index) => <TouchableOpacity key={index} className="border-r border-r-[#0000002E] border-b border-b-[#0000002E] border-t border-t-[#0000002E] p-4 rounded-xl" onPress={()=>navigation.navigate("Case Details")} style={{borderLeftColor:"#305FA1",borderLeftWidth:4}}>
-              <Text className="text-[#000000] font-robotoBold text-lg">{item.name}</Text>
+            getCase?.data?.map((item: Case, index: number) => <TouchableOpacity key={index} className="border-r border-r-[#0000002E] border-b border-b-[#0000002E] border-t border-t-[#0000002E] p-4 rounded-xl" onPress={()=>navigation.navigate("Case Details",{id:item.id})} style={{borderLeftColor:"#305FA1",borderLeftWidth:4}}>
+              <Text className="text-[#000000] font-robotoBold text-lg">{item.title}</Text>
               <Text style={{ color: 'rgba(0,0,0,0.6)' }} className="font-robotoBold mt-2">Status : <Text style={{ color: "#000000" }}>{item.status}</Text></Text>
-              <Text style={{ color: 'rgba(0,0,0,0.6)' }} className="font-robotoBold mt-1">Last Update : <Text style={{ color: "#000000" }}>{item.LastUpdated}</Text></Text>
-              <Text style={{ color: 'rgba(0,0,0,0.6)' }} className="font-robotoBold mt-1">Reminder : <Text style={{ color: "#000000" }}>{item.Remainder}</Text></Text>
+              <Text style={{ color: 'rgba(0,0,0,0.6)' }} className="font-robotoBold mt-1">Last Update : <Text style={{ color: "#000000" }}>{item.last_update}</Text></Text>
+              <Text style={{ color: 'rgba(0,0,0,0.6)' }} className="font-robotoBold mt-1">Reminder : <Text style={{ color: "#000000" }}>{item.reminder_date}{" "}{item.reminder_note}</Text></Text>
             </TouchableOpacity>)
           }
         </View>
@@ -67,8 +68,6 @@ const DashboardScreen = ({ navigation }: { navigation: any }) => {
     </SafeAreaView>
   );
 };
-
-
 ;
 
 export default DashboardScreen;

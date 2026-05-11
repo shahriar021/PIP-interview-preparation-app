@@ -1,5 +1,5 @@
 import { Entypo, Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useLayoutEffect } from 'react'
@@ -9,6 +9,8 @@ import Button from 'src/components/shared/Button';
 
 const VerifyEmailPage = () => {
   const navigation = useNavigation();
+  const route  = useRoute()
+  const {verifyEmail}=route.params
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -41,7 +43,7 @@ const VerifyEmailPage = () => {
   if (!fontsLoaded) return null;
 
   const handleVerify = () => {
-    navigation.navigate("OTP Screen" as never)
+    navigation.navigate("OTP Screen" as never,{verifyEmail})
   }
 
   return (

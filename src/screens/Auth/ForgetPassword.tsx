@@ -1,21 +1,22 @@
 import { Entypo, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useLayoutEffect } from 'react'
-import { Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native'
+import React, { useLayoutEffect, useState } from 'react'
+import { Alert, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native'
 import Button from 'src/components/shared/Button';
+import { useForgetPassMutation } from 'src/redux/features/auth/authApi';
 
 const ForgetPassword = () => {
 
   const navigation = useNavigation();
-
-  const { width, height } = useWindowDimensions();
+  const [forgetPassEmail] = useForgetPassMutation()
+  const [email, setEmail] = useState('')
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Forgot Password",
-      headerTitleStyle:{
-        fontFamily:'open-sans',
+      headerTitleStyle: {
+        fontFamily: 'open-sans',
       },
       headerStyle: {
         backgroundColor: "white",
@@ -38,8 +39,27 @@ const ForgetPassword = () => {
     });
   }, [navigation]);
 
-  const handleForget = () => {
-    navigation.navigate("Login OTP" as never)
+  const handleForget = async () => {
+    if (!email?.trim()) {
+      Alert.alert('Validation', 'Please enter your email address.')
+      return
+    }
+
+    try {
+      const result = await forgetPassEmail({ email: email?.trim() }).unwrap()
+
+      if (result?.success) {
+        console.log(result,"result-0-")
+        navigation.navigate("VerifyEmail" as never,{verifyEmail:result?.data?.email})
+      }
+
+    } catch (error: any) {
+      const message =
+        error?.data?.message ||
+        error?.data?.detail ||
+        'Something went wrong. Please try again.'
+      Alert.alert('Failed', message)
+    }
   }
 
   return (
@@ -53,12 +73,19 @@ const ForgetPassword = () => {
 
         <View className='flex-row justify-between items-center border border-[#DCDCDC] rounded-[100] p-3 mt-2'>
           <View className='flex-row items-center gap-2  flex-1'>
-            <View style={{ width: 42, height: 42, borderRadius: 100, overflow: 'hidden', alignItems: "center", justifyContent: "center",backgroundColor:"#1D35571A" }}>
-                <Ionicons name="mail-outline" size={24} color="#1D3557" />
+            <View style={{ width: 42, height: 42, borderRadius: 100, overflow: 'hidden', alignItems: "center", justifyContent: "center", backgroundColor: "#1D35571A" }}>
+              <Ionicons name="mail-outline" size={24} color="#1D3557" />
             </View>
-            <TextInput placeholder='Enter Your E-Mail' style={{flex:1}}/>
+            <TextInput
+              placeholder='Enter Your E-Mail'
+              style={{ flex: 1 }}
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
           </View>
-          <TouchableOpacity style={{ width: 42, height: 42, borderRadius: 100, overflow: 'hidden', alignItems: "center", justifyContent: "center" }} onPress={()=>navigation.navigate("VerifyEmail")}>
+          <TouchableOpacity style={{ width: 42, height: 42, borderRadius: 100, overflow: 'hidden', alignItems: "center", justifyContent: "center" }} onPress={handleForget}>
             <LinearGradient colors={["#1C75AD", "#083D70"]} style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }}>
               <Entypo name="chevron-small-right" size={24} color="white" />
             </LinearGradient>

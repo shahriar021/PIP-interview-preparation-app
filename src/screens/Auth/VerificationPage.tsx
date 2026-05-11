@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image, useWindowDimensions } from 'react-native'
 import React, { useLayoutEffect } from 'react'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 import { scale, verticalScale } from 'react-native-size-matters';
 import Button from 'src/components/shared/Button';
@@ -8,6 +8,8 @@ import Button from 'src/components/shared/Button';
 const VerificationPage = () => {
   const { width } = useWindowDimensions()
   const navigation = useNavigation();
+  const route = useRoute()
+  const {email}=route?.params
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -32,7 +34,7 @@ const VerificationPage = () => {
   }, [navigation])
 
   const handleVerify=()=>{
-    navigation.navigate("Sign OTP")
+    navigation.navigate("Sign OTP",{verifyEmail:email})
   }
 
   return (
@@ -45,7 +47,7 @@ const VerificationPage = () => {
 
         <View>
           <Text className='text-[#4D4D55] text-sm'>via Email:</Text>
-          <Text className='text-[#2F2F36] text-xl mt-2 mb-2'>and***ley@yourdomain.com</Text>
+          <Text className='text-[#2F2F36] text-xl mt-2 mb-2'>{email}</Text>
         </View>
       </View>
 

@@ -2,9 +2,12 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { useGetCaseTypesQuery } from 'src/redux/features/case/caseApi';
 
 const CaseType = () => {
     const navigation = useNavigation()
+    const {data:getCaseTypes}=useGetCaseTypesQuery(undefined)
+    console.log(getCaseTypes)
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Case Type",
@@ -37,8 +40,8 @@ const CaseType = () => {
         <View className='flex-1 bg-white p-3'>
             <Text className='text-[#33363F] font-robotoBold text-2xl'>What type of case are you tracking?</Text>
             <View className='flex-col gap-3 mt-4 mb-2'>
-                {caseArray.map((item) => <TouchableOpacity key={item} style={{ backgroundColor: 'rgba(0,0,0,0.05)' }} className='p-4 rounded-xl border border-gray-300' onPress={()=>navigation.navigate("Case Details create")}>
-                    <Text className='font-robotoBold text-lg'>{item}</Text>
+                {getCaseTypes?.data?.map((item:string) => <TouchableOpacity key={item.id} style={{ backgroundColor: 'rgba(0,0,0,0.05)' }} className='p-4 rounded-xl border border-gray-300' onPress={()=>navigation.navigate("Case Details create",{id:item.id})}>
+                    <Text className='font-robotoBold text-lg'>{item?.name}</Text>
                 </TouchableOpacity>)}
             </View>
         </View>

@@ -10,12 +10,13 @@ import {
 import React, { useLayoutEffect, useState } from "react";
 import { Entypo, Feather, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
-import { setToken, setUser, setUserType } from "src/redux/features/auth/authSlice";
+import { setRefToken, setToken, setUser, setUserType } from "src/redux/features/auth/authSlice";
 import { useLoginMutation } from "src/redux/features/auth/authApi";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import Button from "src/components/shared/Button";
+import { configureLayoutAnimationBatch } from "react-native-reanimated/lib/typescript/core";
 
 const LoginScreen = () => {
   const { height, width } = useWindowDimensions();
@@ -51,23 +52,38 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const handleLogin = async () => {
-     if (email == "" && password == "") {
-      Alert.alert("Please fill up the fields!!")
-      return ;
-     }
+  if (email == "" && password == "") {
+    Alert.alert("Please fill up the fields!!")
+    return;
+  }
 
-    dispatch(setToken(true))
-  };
+  try {
+    const payload = {
+      email: email.trim(),
+      password,
+    }
+
+    const result = await postLogin(payload).unwrap()
+    if (result?.success) {
+      dispatch(setToken(result.data.access))
+      dispatch(setRefToken(result.data.refresh))
+      dispatch(setUser(result.data.user))
+    }
+
+  } catch (error: any) {
+    console.log(error,"eror")
+    const message =
+      error?.data?.message ||
+      error?.data?.detail ||
+      'Login failed. Please check your credentials.'
+    Alert.alert('Login Failed', message)
+  }
+};
   const [fontsLoaded] = useFonts({
     'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),
   });
 
   if (!fontsLoaded) return null;
-
-  const handleVerify = () => {
-    navigation.navigate("VerifyEmail" as never)
-  }
-
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff', }}>

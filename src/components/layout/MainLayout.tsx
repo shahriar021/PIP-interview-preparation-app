@@ -10,6 +10,7 @@ import { useAppSelector } from "src/redux/hooks";
 const MainLayout = () => {
   // const token = useAppSelector((state) => state.auth.user?.access_token);
   const token = useAppSelector((state)=>state.auth.token);
+  console.log(token,"token.")
   // const token = 1;
 
   const [fontsLoaded] = useFonts({

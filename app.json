@@ -38,6 +38,12 @@
     },
     "plugins": [
       [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "Allow access to camera to capture documents"
+        }
+      ],
+      [
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."

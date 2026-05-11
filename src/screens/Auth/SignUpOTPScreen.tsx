@@ -1,9 +1,10 @@
 import { Entypo, Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useLayoutEffect, useRef, useState } from 'react';
-import { Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import Button from 'src/components/shared/Button';
+import { useVerifyOtpMutation } from 'src/redux/features/auth/authApi';
 
 const SignUpOTPScreen = () => {
   const { width, height } = useWindowDimensions();
@@ -11,6 +12,11 @@ const SignUpOTPScreen = () => {
 
   const [otpNumbers, setOtpNumbers] = useState(['', '', '', '']);
   const inputRefs = useRef<Array<TextInput | null>>([]);
+
+  const route = useRoute()
+    const {verifyEmail}=route.params
+  
+    const [verifyOtpPost]=useVerifyOtpMutation()
 
   const handleChange = (text: any, index: any) => {
     if (/^\d$/.test(text)) {
@@ -31,10 +37,35 @@ const SignUpOTPScreen = () => {
     }
   };
 
-  const handleVerify = () => {
-    const code = otpNumbers.join('');
-    navigation.navigate("Login" as never);
-  };
+  const handleVerify = async () => {
+      const code = otpNumbers.join('');
+  
+      if (code.length < 4) {
+        Alert.alert('Invalid OTP', 'Please enter the 4-digit code.')
+        return
+      }
+  
+      try {
+        const payload = {
+          email: verifyEmail,
+          otp: code,
+        }
+  
+        const result = await verifyOtpPost(payload).unwrap()
+  
+        if (result?.success) {
+          Alert.alert("Registration complete.")
+          navigation.navigate("Login" as never)
+        }
+  
+      } catch (error: any) {
+        const message =
+          error?.data?.message ||
+          error?.data?.detail ||
+          'Invalid OTP. Please try again.'
+        Alert.alert('Verification Failed', message)
+      }
+    }
 
   useLayoutEffect(() => {
     navigation.setOptions({
