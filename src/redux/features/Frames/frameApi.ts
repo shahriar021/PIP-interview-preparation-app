@@ -9,11 +9,18 @@ const frameApi = baseApi.injectEndpoints({
             })
         }),
 
+         getVideoBasedOnId:builder.query({
+            query:(id)=>({
+                url:`/system/app/videos/${id}/`,
+                method:"GET",
+            })
+        }),
+
         
     })
 })
 
-export const {useGetAllVideosQuery}=frameApi
+export const {useGetAllVideosQuery,useGetVideoBasedOnIdQuery}=frameApi
 
 
 

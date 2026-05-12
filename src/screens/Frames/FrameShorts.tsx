@@ -2,19 +2,25 @@ import { View, Text, useWindowDimensions, TouchableOpacity } from 'react-native'
 import React, { useRef, useState } from 'react'
 import Video from 'react-native-video'
 import { Ionicons } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { useGetVideoBasedOnIdQuery } from 'src/redux/features/Frames/frameApi'
 
 const FrameShorts = () => {
     const { height } = useWindowDimensions()
     const navigation = useNavigation()
     const videoRef = useRef(null);
+    const route = useRoute()
+    const {id}=route.params
     const [paused, setPaused] = useState(false);
     const [progress, setProgress] = useState(0); // Progress 0-1
+    const {data:getVideo}=useGetVideoBasedOnIdQuery(id)
     const handleProgress = ({ currentTime, playableDuration }) => {
         if (playableDuration > 0) {
             setProgress(currentTime / playableDuration);
         }
     };
+    console.log(getVideo)
+
     return (
         <View className='flex-1 bg-black relative'>
             <TouchableOpacity className='p-1 absolute z-10' onPress={() => navigation.goBack()}>
@@ -24,7 +30,7 @@ const FrameShorts = () => {
             </TouchableOpacity>
             <Video
                 ref={videoRef}
-                source={require("../../../assets/video/videocase1.mp4")}
+                source={{uri:getVideo?.data?.video_file}}
                 style={{ height: "100%", width: '100%', position: 'relative' }}
                 resizeMode="cover"
                 controls

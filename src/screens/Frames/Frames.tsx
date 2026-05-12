@@ -9,7 +9,6 @@ const Frames = () => {
     const navigation = useNavigation()
     const { height } = useWindowDimensions()
     const {data:getAllVideos}=useGetAllVideosQuery(undefined)
-    console.log(getAllVideos?.results)
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -32,7 +31,6 @@ const Frames = () => {
         });
     }, [navigation]);
 
-    const [videoArray] = useState(Array.from({ length: 20 }, (_, i) => i + 1))
 
     return (
         <View className='flex-1 items-center justify-center bg-white p-3'>
@@ -40,7 +38,7 @@ const Frames = () => {
 
             <ScrollView>
                 <View className='flex-row flex-wrap gap-2'>
-                    {getAllVideos?.results?.map(item => <TouchableOpacity key={item?.id} style={{ width: "49%", height: verticalScale(247), borderRadius: 9, overflow: "hidden",position:'relative' }} onPress={() => navigation.navigate("Frame Shorts")}>
+                    {getAllVideos?.results?.map(item => <TouchableOpacity key={item?.id} style={{ width: "49%", height: verticalScale(247), borderRadius: 9, overflow: "hidden",position:'relative' }} onPress={() => navigation.navigate("Frame Shorts",{id:item.id})}>
                         <Image source={{uri:item?.thumbnail}} style={{ width: "100%", height: "100%" }} />
                             <Text className='absolute bottom-2 m-2 text-white font-robotoRegular'>{item?.description}</Text>
                     </TouchableOpacity>)}
