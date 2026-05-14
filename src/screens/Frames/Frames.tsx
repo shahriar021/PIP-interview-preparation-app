@@ -32,20 +32,32 @@ const Frames = () => {
     }, [navigation]);
 
 
-    return (
-        <View className='flex-1 items-center justify-center bg-white p-3'>
-
-
-            <ScrollView>
-                <View className='flex-row flex-wrap gap-2'>
-                    {getAllVideos?.results?.map(item => <TouchableOpacity key={item?.id} style={{ width: "49%", height: verticalScale(247), borderRadius: 9, overflow: "hidden",position:'relative' }} onPress={() => navigation.navigate("Frame Shorts",{id:item.id})}>
-                        <Image source={{uri:item?.thumbnail}} style={{ width: "100%", height: "100%" }} />
-                            <Text className='absolute bottom-2 m-2 text-white font-robotoRegular'>{item?.description}</Text>
-                    </TouchableOpacity>)}
-                </View>
-            </ScrollView>
-        </View>
-    )
+   return (
+    <View className='flex-1 bg-white p-3'>
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
+                {getAllVideos?.results?.map(item => (
+                    <TouchableOpacity
+                        key={item?.id}
+                        style={{
+                            width: '49%',
+                            height: verticalScale(247),
+                            borderRadius: 9,
+                            overflow: 'hidden',
+                            position: 'relative',
+                        }}
+                        onPress={() => navigation.navigate("Frame Shorts", { id: item.id })}
+                    >
+                        <Image source={{ uri: item?.thumbnail }} style={{ width: '100%', height: '100%' }} />
+                        <Text className='absolute bottom-2 m-2 text-white font-robotoRegular'>
+                            {item?.description}
+                        </Text>
+                    </TouchableOpacity>
+                ))}
+            </View>
+        </ScrollView>
+    </View>
+)
 }
 
 export default Frames

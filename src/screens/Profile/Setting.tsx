@@ -2,15 +2,18 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Entypo, Ionicons } from '@expo/vector-icons'
-import { settingItems } from 'src/constants/settingItems'
+import { getSettingItems } from 'src/constants/settingItems'
+import { useTranslation } from 'react-i18next'
 
 const Setting = () => {
 
     const navigation = useNavigation()
+     const { t } = useTranslation();
+     const settingItems = getSettingItems(t);
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Settings",
+            title: t('screens.setting'),
             headerTitleStyle: {
                 fontFamily: 'open-sans',
             },

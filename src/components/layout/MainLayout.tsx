@@ -6,12 +6,24 @@ import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "src/routes/AuthStack";
 import { useFonts } from "expo-font";
 import { useAppSelector } from "src/redux/hooks";
+import i18n from 'i18next';
+import { initLanguage } from "src/i18n";
 
 const MainLayout = () => {
   // const token = useAppSelector((state) => state.auth.user?.access_token);
-  const token = useAppSelector((state)=>state.auth.token);
+  // const token = useAppSelector((state)=>state.auth.token);
   console.log(token,"token.")
-  // const token = 1;
+  const token = 1;
+
+  const [langReady, setLangReady] = useState(false);
+
+  useEffect(() => {
+    // Load saved or device language before rendering
+    initLanguage().then(lang => {
+      i18n.changeLanguage(lang).then(() => setLangReady(true));
+    });
+  }, []);
+
 
   const [fontsLoaded] = useFonts({
     'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),
@@ -24,7 +36,7 @@ const MainLayout = () => {
     'open-sans':require('../../../assets/fonts/OpenSans-Bold.ttf')
   });
 
-  if (!fontsLoaded) return null;
+  if (!langReady && !fontsLoaded) return null;
 
   return (
     <NavigationContainer>

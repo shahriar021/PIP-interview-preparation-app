@@ -1,14 +1,14 @@
-export const settingItems = [
-    
-    {
-        icon:require('../../assets/restroIcon/Key_light.png'),
-        label:"Change Password",
-        route:"Change Password",
-    },
-    {
-        icon:require('../../assets/pipyrit/langua.png'),
-        label:"Language",
-        route:"Language",
-    },
-    
-]
+import { TFunction } from 'i18next';
+
+export const getSettingItems = (t: TFunction) => [
+  {
+    icon: require('../../assets/restroIcon/Key_light.png'),
+    label: t('screens.changePassword'),
+    route: "Change Password",
+  },
+  {
+    icon: require('../../assets/pipyrit/langua.png'),
+    label: t('screens.language'),
+    route: "Language",
+  },
+];

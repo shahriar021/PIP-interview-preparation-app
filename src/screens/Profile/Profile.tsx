@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Entypo } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
-import { profileItems } from "../../constants/profileItems";
+import { getProfileItems } from "../../constants/profileItems";
 import { setToken, setUser, setUserType } from "src/redux/features/auth/authSlice";
 import * as Progress from "react-native-progress";
 
@@ -27,6 +27,8 @@ import LeftSvg from "../../../assets/pipyrit/LeftSvg.svg"
 import r from "../../../assets/pipyrit/r.svg"
 import { scale, verticalScale } from "react-native-size-matters";
 import { useAppDispatch, useAppSelector } from "src/redux/hooks";
+import { useGetTermOrPrivacyOrAboutQuery } from "src/redux/features/profile/profileApi";
+import { useTranslation } from "react-i18next";
 
 const { width } = Dimensions.get("window");
 
@@ -54,8 +56,9 @@ export default function YourComponent() {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp>();
   const dispatch = useAppDispatch();
-
+   const { t } = useTranslation();
   const { width, height } = useWindowDimensions()
+  const profileItems = getProfileItems(t);
 
   const SettingsItem = ({ icon, label, onPress }: ProfileItemsProp) => (
     <TouchableOpacity

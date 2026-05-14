@@ -7,6 +7,7 @@ import MyOrders from "src/screens/Orders/MyOrders";
 import { scale, verticalScale } from "react-native-size-matters";
 import Frames from "src/screens/Frames/Frames";
 import Preparation from "src/screens/Preparation/Preparation";
+import { useTranslation } from "react-i18next";
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -28,13 +29,22 @@ const icons = {
 
 export const BottomNavigation = () => {
   const { width } = useWindowDimensions();
-  const TAB_NAMES = ["Home", "Prep Hub", "My Orders", "Profile"];
+   const { t, i18n } = useTranslation();
+  const currentLang = i18n.language; 
+  const TAB_LABELS: Record<string, string> = {
+    'Home':     t('tabs.home'),
+    'Prep Hub': t('tabs.prepHub'),
+    'Frames':   t('tabs.frames'),
+    'Profile':  t('tabs.profile'),
+  };
+
+  const TAB_NAMES = ["Home", "Prep Hub", "Frames", "Profile"];
 
   // optional: prefetch icons into memory so no delay
   useEffect(() => {
     Object.values(icons).forEach(img => Image.prefetch(Image.resolveAssetSource(img).uri));
   }, []);
-
+  
   return (
     <BottomTabs.Navigator
       initialRouteName="Home"
@@ -100,7 +110,7 @@ export const BottomNavigation = () => {
                       flexShrink: 1,
                     }}
                   >
-                    {route.name}
+                     {TAB_LABELS[route.name]}
                   </Text>
                 </View>
               );
@@ -111,10 +121,10 @@ export const BottomNavigation = () => {
         };
       }}
     >
-      <BottomTabs.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
-      <BottomTabs.Screen name="Prep Hub" options={{ headerShown: true }} component={Preparation} />
-      <BottomTabs.Screen name="Frames" options={{ headerShown: true }} component={Frames} />
-      <BottomTabs.Screen name="Profile" options={{ headerShown: false }} component={Profile} />
+      <BottomTabs.Screen name="Home" options={{ headerShown: false, tabBarLabel: t('tabs.home') }} component={HomeScreen} />
+      <BottomTabs.Screen name="Prep Hub" options={{ headerShown: true, tabBarLabel: t('tabs.prepHub') }} component={Preparation} />
+      <BottomTabs.Screen name="Frames" options={{ headerShown: true, tabBarLabel: t('tabs.frames') }} component={Frames} />
+      <BottomTabs.Screen name="Profile" options={{ headerShown: false, tabBarLabel: t('tabs.profile') }} component={Profile} />
     </BottomTabs.Navigator>
   );
 };
