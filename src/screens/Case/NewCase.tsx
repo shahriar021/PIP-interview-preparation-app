@@ -2,13 +2,14 @@ import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { Entypo, Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
 const NewCase = () => {
     const navigation = useNavigation();
-
+    const {t}=useTranslation()
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "New Case",
+            title: t("newCase"),
             headerTitleStyle: {
                 fontFamily: 'open-sans',
             },
@@ -32,15 +33,16 @@ const NewCase = () => {
 
         });
     }, [navigation]);
+
     return (
         <View className='bg-#fff flex-1 p-3'>
-            <Text className='text-[#33363F] font-robotoBold text-2xl'>New Case</Text>
-            <TextInput className='border border-[#0000001A] p-3 rounded-xl mt-3 mb-2' placeholder='Case number or alien number' />
+            <Text className='text-[#33363F] font-robotoBold text-2xl'>{t('newCase')}</Text>
+            <TextInput className='border border-[#0000001A] p-3 rounded-xl mt-3 mb-2' placeholder={t('caseNumber')} />
             <View className="items-center mt-3">
                 <TouchableOpacity className="flex-row items-center  gap-2 border border-[#083D70] p-4 rounded-full" onPress={() => navigation.navigate("Case Type")}>
                     <Entypo name="squared-plus" size={24} color="#7E869E40" />
 
-                    <Text className="font-robotoBold text-lg text-[#083D70]">Add case</Text>
+                    <Text className="font-robotoBold text-lg text-[#083D70]">{t('addCase')}</Text>
 
                 </TouchableOpacity>
             </View>

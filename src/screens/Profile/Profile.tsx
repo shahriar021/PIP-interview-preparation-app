@@ -116,10 +116,10 @@ export default function YourComponent() {
 
         <View className="absolute z-10 px-3 flex-row items-center justify-between w-full" style={{ top: insets.top + 10 }}>
           <Text className="font-robotoBold  text-white text-2xl ">
-            Profile
+            {t('tabs.profile')}
           </Text>
           <Text className="font-robotoRegular text-[#ED9400] text-xl">
-            80 ponts
+            80 {t('points')}
           </Text>
         </View>
 
@@ -137,10 +137,10 @@ export default function YourComponent() {
       <View style={{ flex: 1, backgroundColor: "white", marginTop: 5 }}>
         <Text className="text-center mb-2 font-robotoBold text-2xl">Lukas Wagner</Text>
         <View className='gap-2 w-[190px] mt-1 mb-2' style={{alignSelf:'center'}}>
-          <Text className='text-[#121212]'>Your confidence level<Text className='text-[#FF0C00]'>{" "}(20%)</Text></Text>
+          <Text className='text-[#121212]'>{t('confidenceLevel')}<Text className='text-[#FF0C00]'>{" "}(20%)</Text></Text>
           <Progress.Bar progress={.2} width={null} height={10} color='#FF0C00' unfilledColor='#f2f2f2' borderColor='lightgray' />
         </View>
-        <Text className="text-center font-robotoRegular text-white bg-[#0F3E72] p-2 rounded-full w-[150px]" style={{ alignSelf: 'center' }}>Refer a Friend</Text>
+        <Text className="text-center font-robotoRegular text-white bg-[#0F3E72] p-2 rounded-full w-[150px]" style={{ alignSelf: 'center' }}>{t('referAFriend')}</Text>
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <View className="p-4 items-center">
@@ -158,7 +158,7 @@ export default function YourComponent() {
                 source={require("../../../assets/restroIcon/logout-02.png")}
                 className="w-[30] h-[30]"
               />
-              <Text className="text-[#A13430] ml-2">Log out</Text>
+              <Text className="text-[#A13430] ml-2">{t('logout')}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

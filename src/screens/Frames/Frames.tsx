@@ -4,11 +4,13 @@ import Video from 'react-native-video';
 import { useNavigation } from '@react-navigation/native';
 import { verticalScale } from 'react-native-size-matters';
 import { useGetAllVideosQuery } from 'src/redux/features/Frames/frameApi';
+import { useTranslation } from 'react-i18next';
 
 const Frames = () => {
     const navigation = useNavigation()
     const { height } = useWindowDimensions()
     const {data:getAllVideos}=useGetAllVideosQuery(undefined)
+    const {t}=useTranslation()
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -36,7 +38,7 @@ const Frames = () => {
     <View className='flex-1 bg-white p-3'>
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
-                {getAllVideos?.results?.map(item => (
+                {!getAllVideos?.results?<Text className='text-center w-full font-bold text-xl'>{t('noVideos')}</Text>:getAllVideos?.results?.map(item => (
                     <TouchableOpacity
                         key={item?.id}
                         style={{

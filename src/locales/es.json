@@ -56,6 +56,27 @@
 "addNewCase": "Agregar Nuevo Caso",
 "status": "Estado",
 "lastUpdate": "Última Actualización",
-"reminder": "Recordatorio"
+"reminder": "Recordatorio",
+"practiceDesc": "Elige cómo quieres practicar hoy. Toma cuestionarios para evaluar tus conocimientos o únete a una entrevista simulada para ganar confianza.",
+"confidenceLevel": "Tu nivel de confianza"
+,
+"points": "Puntos",
+"referAFriend": "Referir a un Amigo",
+"editProfileDetails": "Editar Detalles del Perfil",
+"name": "Nombre",
+"email": "Correo",
+"saveChanges": "Guardar Cambios",
+"newCase": "Nuevo Caso",
+"addCase": "Agregar Caso",
+"caseNumber": "Número de caso o número de extranjero",
+"logout": "Cerrar Sesión",
+"noVideos": "¡No se Encontraron Videos!",
+"deleteAccount": "Eliminar Cuenta",
+"changePassword": "Cambiar Contraseña",
+"currentPassword": "Contraseña Actual",
+"newPassword": "Nueva Contraseña",
+"confirmNewPassword": "Confirmar Nueva Contraseña",
+"forgotPassword": "¿Olvidaste la contraseña?"
+
 
 }

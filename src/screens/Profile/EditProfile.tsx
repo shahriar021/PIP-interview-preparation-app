@@ -4,14 +4,16 @@ import { useNavigation } from '@react-navigation/native'
 import { Entypo, Ionicons, Octicons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 import Button from 'src/components/shared/Button'
+import { useTranslation } from 'react-i18next'
 
 const EditProfile = () => {
     const { width, height } = Dimensions.get("window")
     const navigation = useNavigation();
+    const {t}=useTranslation()
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Edit Profile Details",
+            title: t('editProfileDetails'),
             headerTitleStyle: {
                 fontFamily: 'open-sans',
             },
@@ -52,12 +54,12 @@ const EditProfile = () => {
             </View>
 
 
-            <Text className='font-robotoBold text-xl text-[#33363F] text-start w-full'>Name</Text>
+            <Text className='font-robotoBold text-xl text-[#33363F] text-start w-full'>{t('name')}</Text>
             <View className='flex-row items-center border rounded-xl border-gray-400 mt-2 mb-2 p-1'>
                 <TextInput className=' flex-1 p-2' />
             </View>
 
-            <Text className='font-robotoBold text-xl text-[#33363F] text-start w-full'>Email</Text>
+            <Text className='font-robotoBold text-xl text-[#33363F] text-start w-full'>{t('email')}</Text>
             <View className='flex-row items-center border rounded-xl border-gray-400 mt-2 mb-2 p-1'>
                 <TextInput className=' flex-1 p-2' />
             </View>
@@ -65,7 +67,7 @@ const EditProfile = () => {
            
 
             <Button
-                        title={"Save Changes"}
+                        title={t("saveChanges")}
                         colors={["#1C75AD", "#083D70"]}
                         labelSize={14}
                         labelFont={'roboto-Bold'}

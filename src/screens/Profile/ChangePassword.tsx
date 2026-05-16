@@ -2,16 +2,18 @@ import { Entypo, Feather, Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import React, { useLayoutEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Text, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native'
 import Button from 'src/components/shared/Button'
 
 const ChangePassword = () => {
     const { width } = useWindowDimensions()
     const navigation = useNavigation()
+    const {t}=useTranslation()
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Change Password",
+            title: t("changePassword"),
             headerTitleStyle: {
                 fontFamily: 'open-sans',
             },
@@ -39,30 +41,30 @@ const ChangePassword = () => {
 
     return (
         <View className='p-4'>
-            <Text className='font-robotoBold text-xl text-[#33363F]'>Current Password</Text>
+            <Text className='font-robotoBold text-xl text-[#33363F]'>{t('currentPassword')}</Text>
             <View className='flex-row items-center border rounded-xl border-gray-400 mt-2 mb-2 p-1'>
                 <TextInput className=' flex-1' />
                 <Feather name="eye-off" size={24} color="gray" />
             </View>
 
-            <Text className='font-robotoBold text-xl text-[#33363F]'>New Password</Text>
+            <Text className='font-robotoBold text-xl text-[#33363F]'>{t('newPassword')}</Text>
             <View className='flex-row items-center border rounded-xl border-gray-400 mt-2 mb-2 p-1'>
                 <TextInput className=' flex-1' />
                 <Feather name="eye-off" size={24} color="gray" />
             </View>
 
-            <Text className='font-robotoBold text-xl text-[#33363F]'>Confirm New Password</Text>
+            <Text className='font-robotoBold text-xl text-[#33363F]'>{t('confirmNewPassword')}</Text>
             <View className='flex-row items-center border rounded-xl border-gray-400 mt-2 mb-2 p-1'>
                 <TextInput className=' flex-1' />
                 <Feather name="eye-off" size={24} color="gray" />
             </View>
 
             <TouchableOpacity>
-                <Text className='text-[#305FA1] font-robotoBold'>Forgot the password?</Text>
+                <Text className='text-[#305FA1] font-robotoBold'>{t('forgotPassword')}</Text>
             </TouchableOpacity>
 
             <Button
-                title={"Change Password"}
+                title={t('changePassword')}
                 colors={["#1C75AD", "#083D70"]}
                 labelSize={14}
                 labelFont={'roboto-Bold'}

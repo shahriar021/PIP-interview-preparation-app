@@ -56,6 +56,25 @@
 "addNewCase": "Add New Case",
 "status": "Status",
 "lastUpdate": "Last Update",
-"reminder": "Reminder"
-
+"reminder": "Reminder",
+"practiceDesc": "Choose how you'd like to practice today. Take quizzes to test your knowledge or join a mock interview to build confidence."
+,"confidenceLevel": "Your confidence level"
+,
+"points": "Points",
+"referAFriend": "Refer a Friend",
+"editProfileDetails": "Edit Profile Details",
+"name": "Name",
+"email": "Email",
+"saveChanges": "Save Changes",
+"newCase": "New Case",
+"addCase": "Add Case",
+"caseNumber": "Case number or alien number",
+"logout": "Log Out",
+"noVideos": "No Videos Found!",
+"deleteAccount": "Delete Account",
+"changePassword": "Change Password",
+"currentPassword": "Current Password",
+"newPassword": "New Password",
+"confirmNewPassword": "Confirm New Password",
+"forgotPassword": "Forgot the password?"
 }

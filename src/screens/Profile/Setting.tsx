@@ -70,7 +70,7 @@ const Setting = () => {
             <View className='flex-row items-center justify-between p-2 w-full'>
                 <View className='flex-row items-center gap-2'>
                     <Image source={require("../../../assets/restroIcon/Delete.png")} style={{width:24,height:24}}/>
-                    <Text className='text-[#B20000] text-xl font-robotoBold'>Delete Account</Text>
+                    <Text className='text-[#B20000] text-xl font-robotoBold'>{t('deleteAccount')}</Text>
                 </View>
                 <View>
                     <View className='p-1' >

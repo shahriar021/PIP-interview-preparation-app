@@ -11,9 +11,9 @@ import { initLanguage } from "src/i18n";
 
 const MainLayout = () => {
   // const token = useAppSelector((state) => state.auth.user?.access_token);
-  // const token = useAppSelector((state)=>state.auth.token);
+  const token = useAppSelector((state)=>state.auth.token);
   console.log(token,"token.")
-  const token = 1;
+  // const token = 1;
 
   const [langReady, setLangReady] = useState(false);
 
