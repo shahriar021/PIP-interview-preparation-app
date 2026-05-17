@@ -64,6 +64,7 @@ const LoginScreen = () => {
     }
 
     const result = await postLogin(payload).unwrap()
+    // console.log(result,"---login")
     if (result?.success) {
       dispatch(setToken(result.data.access))
       dispatch(setRefToken(result.data.refresh))

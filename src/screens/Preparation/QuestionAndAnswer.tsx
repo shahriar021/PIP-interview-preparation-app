@@ -1,12 +1,15 @@
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Feather, FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { scale, verticalScale } from 'react-native-size-matters';
+import { useGetQuizAndAnsQuery } from 'src/redux/features/quiz/quizApi';
 
 const QuestionAndAnswer = () => {
     const navigation = useNavigation()
+    const route = useRoute()
+    const {RID}=route.params
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Questions & Answers",
@@ -35,14 +38,17 @@ const QuestionAndAnswer = () => {
     }, [navigation]);
     const [questionList] = useState(Array.from({ length: 52 }, (_, i) => i + 1))
 
+    const {data:getQnA}=useGetQuizAndAnsQuery(RID)
+    console.log(getQnA,"aaa")
+
     return (
         <View className='items-center bg-white justify-between flex-1'>
             <View className='w-full items-center mt-5 flex-grow flex-1'>
                 <ScrollView contentContainerStyle={{ flexGrow: 1,paddingBottom:100 }} showsVerticalScrollIndicator={false} >
                     <View className='flex-col gap-1 p-3 '>
-                        {questionList.map(item => <View key={item} className='p-4 '>
-                            <Text className='font-robotoBold text-[#1D1D1D] text-xl'>Q1.Who wrote the Declaration of Independence?</Text>
-                            <Text className='font-robotoBold text-[#7B7B7B] text-xl'>Answer: <Text className='font-robotoBold text-[#1D1D1D] text-xl'>Jane Smith</Text></Text>
+                        {getQnA?.data?.map((item,index) => <View key={item} className='p-4 '>
+                            <Text className='font-robotoBold text-[#1D1D1D] text-xl'>Q:{index+1}{" "}{item.question}</Text>
+                            <Text className='mt-4 font-robotoBold text-[#7B7B7B] text-xl'>Answer: <Text className='font-robotoBold text-[#1D1D1D] text-xl'>{item.answer}</Text></Text>
                         </View>)}
                     </View>
                 </ScrollView>

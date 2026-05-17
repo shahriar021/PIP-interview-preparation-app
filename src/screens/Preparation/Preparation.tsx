@@ -30,7 +30,7 @@ const Preparation = () => {
       <Text className='font-robotoRegular text-black text-md'>{t('practiceDesc')}</Text>
 
       <View className='mt-5 flex-row gap-2 items-center'>
-        <TouchableOpacity style={{width:"49%",height:verticalScale(150),borderRadius:8,overflow:"hidden"}} onPress={()=>navigation.navigate("Quick 1")}>
+        <TouchableOpacity style={{width:"49%",height:verticalScale(150),borderRadius:8,overflow:"hidden"}} onPress={()=>navigation.navigate("Case Type Quiz")}>
             <Image source={require("../../../assets/pipyrit/quick.png")} style={{width:"100%",height:"100%"}}/>
         </TouchableOpacity>
 

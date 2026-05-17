@@ -49,7 +49,7 @@ const ForgetPassword = () => {
       const result = await forgetPassEmail({ email: email?.trim() }).unwrap()
 
       if (result?.success) {
-        console.log(result,"result-0-")
+        // console.log(result,"result-0-")
         navigation.navigate("VerifyEmail" as never,{verifyEmail:result?.data?.email})
       }
 

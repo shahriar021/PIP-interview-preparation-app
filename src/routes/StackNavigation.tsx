@@ -58,6 +58,7 @@ import Language from "src/screens/Profile/Language";
 import Subscription from "src/screens/Subscription/Subscription";
 import Payment from "src/screens/Subscription/Payment";
 import PaymentModal from "src/screens/Subscription/PaymentModal";
+import CaseTypeForQuiz from "src/screens/Preparation/CaseTypeForQuiz";
 
 
 const Stack = createStackNavigator();
@@ -132,6 +133,7 @@ const StackNavigation = () => {
         {/*  */}
         <Stack.Screen name="New Case" options={{headerShown:true}} component={NewCase}/>
         <Stack.Screen name="Case Type" options={{headerShown:true}} component={CaseType}/>
+        <Stack.Screen name="Case Type Quiz" options={{headerShown:true}} component={CaseTypeForQuiz}/>
         <Stack.Screen name="Case Details create" options={{headerShown:true}} component={CaseDetailsCreate}/>
         <Stack.Screen name="Case Details edit" options={{headerShown:true}} component={CaseDetailsEdit}/>
         <Stack.Screen name="Case Details" options={{headerShown:true}} component={CaseDetails}/>

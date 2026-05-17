@@ -40,33 +40,9 @@ const DashboardScreen = ({ navigation }: { navigation: any }) => {
         <Text>{currentLabel}</Text> 
       </TouchableOpacity>
       </View>
-
-
-      {/* {empty ?
-        <View className="flex-row justify-between items-center">
-          <Text className="mt-4 font-robotoBold text-2xl text-[#305FA1] p-3">{t('myCases')}</Text>
-          <TouchableOpacity className="flex-row items-center  gap-2  p-4 rounded-full" onPress={() => navigation.navigate("New Case")}>
-            <Entypo name="squared-plus" size={24} color="#7E869E40" />
-            <Text className="font-robotoBold text-lg text-[#083D70]">{t('addNewCase')}</Text>
-          </TouchableOpacity>
-        </View>
-        :
-        <View>
-          <View style={{ height: verticalScale(286) }}>
-            <Image source={require("../../../assets/pipyrit/homeimage.png")} style={{ width: "100%", height: "100%" }} />
-          </View>
-          <View className="items-center">
-            <TouchableOpacity className="flex-row items-center  gap-2 border border-[#083D70] p-4 rounded-full" onPress={() => navigation.navigate("New Case")}>
-              <Entypo name="squared-plus" size={24} color="#7E869E40" />
-              <Text className="font-robotoBold text-lg text-[#083D70]">Add new case</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      } */}
-
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 150 }}>
         <View className="flex-col gap-2 p-3">
-          {! getCase?.data?<View>
+          {!getCase?.data?.length?<View>
           <View style={{ height: verticalScale(286) }}>
             <Image source={require("../../../assets/pipyrit/homeimage.png")} style={{ width: "100%", height: "100%" }} />
           </View>

@@ -1,12 +1,14 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useLayoutEffect } from 'react'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { scale, verticalScale } from 'react-native-size-matters';
 
 const QuickResult = () => {
     const navigation = useNavigation()
+    const route = useRoute()
+    const {totalScore,rId}=route.params
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Quiz Result",
@@ -39,14 +41,14 @@ const QuickResult = () => {
                 <Text className='text-[#ED9400] font-robotoBold text-xl'>Congratulations! You have scored</Text>
                 <View className='rounded-full overflow-hidden mt-3' style={{width:scale(106),height:verticalScale(106)}}>
                     <LinearGradient colors={["#1C75AD", "#083D70"]} style={{width:"100%",height:"100%", padding: 20, alignItems: 'center',justifyContent:"center" }}>
-                        <Text className='text-2xl text-white font-robotoBold'>20</Text>
+                        <Text className='text-2xl text-white font-robotoBold'>{totalScore}</Text>
                         <Text className='text-lg text-white font-robotoBold'>out of 25</Text>
                     </LinearGradient>
                 </View>
                 <Text className='mt-4 text-[#2A2A2A] font-robotoBold'>You have earned</Text>
                 <View className='flex-row justify-center gap-2 items-center mt-2'>
                     <FontAwesome5 name="coins" size={24} color="#FFBB00" />
-                    <Text className='text-[#FFBB00] font-robotoBold'>80 Points</Text>
+                    <Text className='text-[#FFBB00] font-robotoBold'>{totalScore*4} Points</Text>
                 </View>
                 <View className='flex-row justify-center gap-2 items-center mt-4 border border-[#083D70] p-3 rounded-full'>
                     <MaterialIcons name="loop" size={24} color="#083D70" />
@@ -55,7 +57,7 @@ const QuickResult = () => {
             </View>
 
             <View className='w-full flex-col mb-4'>
-                <TouchableOpacity className='border border-[#1C75AD] p-3 rounded-full m-3 items-center' onPress={()=>navigation.navigate("Quick Answer")}>
+                <TouchableOpacity className='border border-[#1C75AD] p-3 rounded-full m-3 items-center' onPress={()=>navigation.navigate("Quick Answer",{RID:rId})}>
                     <Text className='text-[#1C75AD] font-robotoRegular text-lg'>View All Question</Text>
                 </TouchableOpacity>
                  <TouchableOpacity className='border border-[#1C75AD] p-3 rounded-full m-3 items-center flex-row justify-center gap-2' onPress={()=>navigation.navigate("BottomScreen",{screen:"Home"})}>
