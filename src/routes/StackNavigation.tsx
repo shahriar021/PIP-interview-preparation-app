@@ -59,6 +59,7 @@ import Subscription from "src/screens/Subscription/Subscription";
 import Payment from "src/screens/Subscription/Payment";
 import PaymentModal from "src/screens/Subscription/PaymentModal";
 import CaseTypeForQuiz from "src/screens/Preparation/CaseTypeForQuiz";
+import CameraScreen from "src/screens/Profile/CameraScreen";
 
 
 const Stack = createStackNavigator();
@@ -156,6 +157,7 @@ const StackNavigation = () => {
         <Stack.Screen name="Payment Animation" options={{headerShown:false}} component={PaymentAnimation}/>
         <Stack.Screen name="Payment Info" options={{headerShown:true}} component={PaymentInfo}/>
         <Stack.Screen name="Payment Card" options={{headerShown:true}} component={PaymentModal}/>
+        <Stack.Screen name="CameraScreenPro" options={{headerShown:true}} component={CameraScreen}/>
       </Stack.Navigator>
     // </NavigationContainer>
   );

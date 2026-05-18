@@ -1,12 +1,16 @@
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Feather, FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { scale, verticalScale } from 'react-native-size-matters';
+import { useGetIntAndAnsQuery } from 'src/redux/features/interview/interviewApi';
 
 const InterviewQnA = () => {
     const navigation = useNavigation()
+    const route = useRoute()
+    const {rId}=route.params
+    const {data:getIntnQna}=useGetIntAndAnsQuery(rId)
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Questions & Answers",

@@ -38,6 +38,7 @@ type TAuthData = {
   userType:string | null;
   token:string | null; 
   refToken:string | null; 
+  userID:number | null
 };
 
 const initialState: TAuthData = {
@@ -48,7 +49,8 @@ const initialState: TAuthData = {
   BASE_URL:null,
   userType:null,
   token:null,
-  refToken:null
+  refToken:null,
+  userID:null,
 };
 
 const authSlice=createSlice({
@@ -74,10 +76,13 @@ const authSlice=createSlice({
     },
     setRefToken:(state,action)=>{
       state.refToken=action.payload
+    },
+    setUserId:(state,action)=>{
+      state.userID=action.payload
     }
   }
 })
 
-export const { setUser,setCompanyAuth,setBaseUrl,setUserType,setToken,setRefToken } =
+export const { setUser,setCompanyAuth,setBaseUrl,setUserType,setToken,setRefToken,setUserId } =
   authSlice.actions;
 export default authSlice.reducer;

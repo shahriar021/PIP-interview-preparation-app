@@ -17,7 +17,22 @@ const quizhApi = baseApi.injectEndpoints({
             })
         }),
 
+        submitMarksnPoints: builder.mutation({
+            query: (body) => ({
+                url: `/quizzes/quick-quiz/save-score/`,
+                method: "POST",
+                body
+            })
+        }),
+
+        getQuizHistory: builder.query({
+            query: (id) => ({
+                url: `/quizzes/quiz-results/`,
+                method: "GET", 
+            })
+        }),
+
     })
 })
 
-export const {useGetQuizInfoQuery ,useGetQuizAndAnsQuery} = quizhApi
+export const {useGetQuizInfoQuery ,useGetQuizAndAnsQuery,useSubmitMarksnPointsMutation,useGetQuizHistoryQuery} = quizhApi

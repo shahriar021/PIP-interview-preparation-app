@@ -134,7 +134,7 @@ const QuickQuiz1 = () => {
             setSelectedOptionId(null)
             setIsAnswered(false)
         } else {
-            navigation.navigate("Quick Result" as never,{totalScore:totalCorrect,rId:resId})
+            navigation.navigate("Interview Result" as never,{totalScore:totalCorrect,rId:resId})
         }
     }
 

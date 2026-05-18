@@ -10,7 +10,7 @@ import {
 import React, { useLayoutEffect, useState } from "react";
 import { Entypo, Feather, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
-import { setRefToken, setToken, setUser, setUserType } from "src/redux/features/auth/authSlice";
+import { setRefToken, setToken, setUser, setUserId, setUserType } from "src/redux/features/auth/authSlice";
 import { useLoginMutation } from "src/redux/features/auth/authApi";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
@@ -64,11 +64,12 @@ const LoginScreen = () => {
     }
 
     const result = await postLogin(payload).unwrap()
-    // console.log(result,"---login")
+    console.log(result?.data?.user?.id,"---login")
     if (result?.success) {
       dispatch(setToken(result.data.access))
       dispatch(setRefToken(result.data.refresh))
       dispatch(setUser(result.data.user))
+      dispatch(setUserId(result?.data?.user?.id))
     }
 
   } catch (error: any) {

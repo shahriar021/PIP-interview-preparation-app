@@ -1,9 +1,10 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { scale, verticalScale } from 'react-native-size-matters';
+import { useSubmitMarksnPointsMutation } from 'src/redux/features/quiz/quizApi';
 
 const QuickResult = () => {
     const navigation = useNavigation()
@@ -35,6 +36,19 @@ const QuickResult = () => {
 
         });
     }, [navigation]);
+     const [submitMarksnPoints] = useSubmitMarksnPointsMutation()
+
+    // ── Fire once when screen mounts ──────────────────────────────────────
+    useEffect(() => {
+    submitMarksnPoints({
+        result_id:1,
+        correct_answers: totalScore,
+        total_questions: 25,
+        earned_points:   totalScore * 4,  
+    }).unwrap()
+     .then((res) => console.log('SUCCESS', res))
+     .catch((err) => console.log('ERROR', err))
+}, [])
     return (
         <View className='items-center bg-white justify-between flex-1'>
             <View className='w-full items-center mt-5'>

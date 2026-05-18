@@ -27,7 +27,7 @@ import LeftSvg from "../../../assets/pipyrit/LeftSvg.svg"
 import r from "../../../assets/pipyrit/r.svg"
 import { scale, verticalScale } from "react-native-size-matters";
 import { useAppDispatch, useAppSelector } from "src/redux/hooks";
-import { useGetTermOrPrivacyOrAboutQuery } from "src/redux/features/profile/profileApi";
+import { useGetProfileQuery, useGetTermOrPrivacyOrAboutQuery } from "src/redux/features/profile/profileApi";
 import { useTranslation } from "react-i18next";
 
 const { width } = Dimensions.get("window");
@@ -56,9 +56,12 @@ export default function YourComponent() {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp>();
   const dispatch = useAppDispatch();
-   const { t } = useTranslation();
+  const { t } = useTranslation();
   const { width, height } = useWindowDimensions()
   const profileItems = getProfileItems(t);
+  const userId = useAppSelector((state) => state.auth.userID)
+
+  const { data: getProfile } = useGetProfileQuery(userId)
 
   const SettingsItem = ({ icon, label, onPress }: ProfileItemsProp) => (
     <TouchableOpacity
@@ -124,9 +127,13 @@ export default function YourComponent() {
         </View>
 
         {/* Avatar */}
-        <View className=" absolute z-10 overflow-hidden rounded-2xl left-1/2 bottom-0 -translate-x-1/2 border-4 border-white" style={{ width: scale(100), height: verticalScale(100) }}>
+        <View className="absolute z-10 overflow-hidden rounded-2xl left-1/2 bottom-0 -translate-x-1/2 border-4 border-white" style={{ width: scale(100), height: verticalScale(100) }}>
           <Image
-            source={require("../../../assets/restroIcon/tikaImg.jpg")}
+            source={
+              getProfile?.data?.profile_picture
+                ? { uri: getProfile.data.profile_picture }
+                : require("../../../assets/restroIcon/tikaImg.jpg")
+            }
             style={{ width: "100%", height: "100%" }}
             resizeMode="cover"
           />
@@ -135,9 +142,9 @@ export default function YourComponent() {
 
       {/* ✅ Content Area */}
       <View style={{ flex: 1, backgroundColor: "white", marginTop: 5 }}>
-        <Text className="text-center mb-2 font-robotoBold text-2xl">Lukas Wagner</Text>
-        <View className='gap-2 w-[190px] mt-1 mb-2' style={{alignSelf:'center'}}>
-          <Text className='text-[#121212]'>{t('confidenceLevel')}<Text className='text-[#FF0C00]'>{" "}(20%)</Text></Text>
+        <Text className="text-center mb-2 font-robotoBold text-2xl">{getProfile?.data?.full_name}</Text>
+        <View className='gap-2 w-[190px] mt-1 mb-2' style={{ alignSelf: 'center' }}>
+          <Text className='text-[#121212]'>{t('confidenceLevel')}<Text className='text-[#FF0C00]'>{" "}(0%)</Text></Text>
           <Progress.Bar progress={.2} width={null} height={10} color='#FF0C00' unfilledColor='#f2f2f2' borderColor='lightgray' />
         </View>
         <Text className="text-center font-robotoRegular text-white bg-[#0F3E72] p-2 rounded-full w-[150px]" style={{ alignSelf: 'center' }}>{t('referAFriend')}</Text>
