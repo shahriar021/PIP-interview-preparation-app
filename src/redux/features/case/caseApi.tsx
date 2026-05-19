@@ -13,7 +13,8 @@ const authApi = baseApi.injectEndpoints({
             query:()=>({
                 url:"/cases/my-cases/",
                 method:"GET",
-            })
+            }),
+            providesTags:['Case']
         }),
 
         postAllCase:builder.mutation({
@@ -22,7 +23,8 @@ const authApi = baseApi.injectEndpoints({
                 method:"POST",
                 body,
                  formData: true,
-            })
+            }),
+            invalidatesTags:['Case']
         }),
 
         getCaseBasedOnId:builder.query({
@@ -37,7 +39,8 @@ const authApi = baseApi.injectEndpoints({
                 url:`/cases/my-cases/${id}/`,
                 method:"PATCH",
                 body
-            })
+            }),
+            invalidatesTags:['Case']
         }),
        
     })

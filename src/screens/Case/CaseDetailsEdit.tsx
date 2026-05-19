@@ -1,10 +1,10 @@
-import { View, Text, TouchableOpacity, ScrollView, TextInput, Alert, Platform } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, TextInput, Alert, Platform, Image } from 'react-native'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { Entypo, EvilIcons, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Button from 'src/components/shared/Button';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {  useEditCaseBasedOnIdMutation, useGetCaseBasedOnIdQuery } from 'src/redux/features/case/caseApi';
+import { useEditCaseBasedOnIdMutation, useGetCaseBasedOnIdQuery } from 'src/redux/features/case/caseApi';
 
 const CaseDetailsEdit = () => {
     const navigation = useNavigation()
@@ -21,6 +21,7 @@ const CaseDetailsEdit = () => {
     const [reminderDate, setReminderDate] = useState(new Date())
     const [reminderNote, setReminderNote] = useState('')
     const [notes, setNotes] = useState('')
+    const [photo, setPhoto] = useState<any>(null)
 
     // Date picker visibility
     const [showLastUpdatePicker, setShowLastUpdatePicker] = useState(false)
@@ -39,32 +40,115 @@ const CaseDetailsEdit = () => {
         }
     }, [getCaseDetails])
 
+    const handleCamera = async () => {
+        navigation.navigate("CameraScreenPro" as never, {
+            onCapture: (uri: string) => {
+                setPhoto({
+                    uri,
+                    name: `doc_${Date.now()}.jpg`,
+                    type: 'image/jpeg',
+                })
+            }
+        } as never)
+    }
+
     const formatDate = (date: Date) => date.toISOString().split('T')[0] // "2026-05-10"
 
     const formatDisplay = (date: Date) =>
         date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' })
 
+    // const handleEdit = async () => {
+    //     try {
+    //         const body = {
+    //             case_number: getCaseDetails?.data?.case_number ?? null,
+    //             case_type: getCaseDetails?.data?.case_type ?? 0,
+    //             case_type_details: {
+    //                 name: getCaseDetails?.data?.case_type_details?.name ?? ''
+    //             },
+    //             title,
+    //             last_update: formatDate(lastUpdate),
+    //             status,
+    //             reminder_date: formatDate(reminderDate),
+    //             reminder_note: reminderNote,
+    //             notes,
+    //         }
+
+    //         await editCase({ id, body }).unwrap()
+    //         Alert.alert("Success", "Case updated successfully!")
+    //         // navigation.navigate("BottomScreen", { screen: "Home" })
+    //     } catch (error) {
+    //         Alert.alert("Error", "Failed to update case. Please try again.")
+    //     }
+    // }
+
     const handleEdit = async () => {
         try {
-            const body = {
-                case_number: getCaseDetails?.data?.case_number ?? null,
-                case_type: getCaseDetails?.data?.case_type ?? 0,
-                case_type_details: {
+            const formData = new FormData()
+
+            formData.append(
+                'case_number',
+                String(getCaseDetails?.data?.case_number ?? '')
+            )
+
+            formData.append(
+                'case_type',
+                String(getCaseDetails?.data?.case_type ?? 0)
+            )
+
+            formData.append(
+                'case_type_details',
+                JSON.stringify({
                     name: getCaseDetails?.data?.case_type_details?.name ?? ''
-                },
-                title,
-                last_update: formatDate(lastUpdate),
-                status,
-                reminder_date: formatDate(reminderDate),
-                reminder_note: reminderNote,
-                notes,
+                })
+            )
+
+            formData.append('title', title)
+
+            formData.append(
+                'last_update',
+                formatDate(lastUpdate)
+            )
+
+            formData.append('status', status)
+
+            formData.append(
+                'reminder_date',
+                formatDate(reminderDate)
+            )
+
+            formData.append(
+                'reminder_note',
+                reminderNote
+            )
+
+            formData.append('notes', notes)
+
+            // upload new photo if selected
+            if (photo?.uri) {
+                formData.append('documents', {
+                    uri: photo.uri,
+                    name: photo.name,
+                    type: photo.type,
+                } as any)
             }
 
-            await editCase({ id, body }).unwrap()
-            Alert.alert("Success", "Case updated successfully!")
-            // navigation.navigate("BottomScreen", { screen: "Home" })
+            await editCase({
+                id,
+                body: formData,
+            }).unwrap()
+
+            Alert.alert(
+                "Success",
+                "Case updated successfully!"
+            )
+
         } catch (error) {
-            Alert.alert("Error", "Failed to update case. Please try again.")
+            console.log(error)
+
+            Alert.alert(
+                "Error",
+                "Failed to update case. Please try again."
+            )
         }
     }
 
@@ -199,10 +283,51 @@ const CaseDetailsEdit = () => {
 
                 <View className='mb-2'>
                     <View className='flex-row items-center justify-between'>
-                        <Text className='text-[#4D4D55] font-robotoBold text-md'>Documents (Optional)</Text>
-                        <EvilIcons name="plus" size={24} color="#222222" />
+                        <Text className='text-[#4D4D55] font-robotoBold text-md'>
+                            Documents (Optional)
+                        </Text>
+
+                        <TouchableOpacity onPress={handleCamera}>
+                            <EvilIcons name="plus" size={24} color="#222222" />
+                        </TouchableOpacity>
                     </View>
-                    <View className="flex-1 justify-center items-center mt-4 h-[100px] border border-dashed rounded-xl border-gray-300" />
+
+                    <TouchableOpacity onPress={handleCamera}>
+                        <View className="flex-1 justify-center items-center mt-4 h-[160px] border border-dashed rounded-xl border-gray-300 overflow-hidden">
+
+                            {photo?.uri ? (
+                                <Image
+                                    source={{ uri: photo.uri }}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                    }}
+                                    resizeMode="cover"
+                                />
+                            ) : typeof getCaseDetails?.data?.documents?.[0] === 'string' &&
+                                getCaseDetails.data.documents[0].trim() !== '' ? (
+                                <Image
+                                    source={{
+                                        uri: getCaseDetails.data.documents[0]
+                                    }}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                    }}
+                                    resizeMode="cover"
+                                />
+                            ) : (
+                                <View className='items-center'>
+                                    <Entypo name="upload" size={28} color="#CACACA" />
+
+                                    <Text className='text-[#CACACA] mt-2'>
+                                        Tap to upload document
+                                    </Text>
+                                </View>
+                            )}
+
+                        </View>
+                    </TouchableOpacity>
                 </View>
 
                 <View className='items-center'>

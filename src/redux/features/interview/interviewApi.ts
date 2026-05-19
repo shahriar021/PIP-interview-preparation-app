@@ -31,9 +31,17 @@ const quizhApi = baseApi.injectEndpoints({
             })
         }),
 
+        submitINTMarksnPoints: builder.mutation({
+            query: (body) => ({
+                url: `/quizzes/interview-process/save-score/`,
+                method: "POST",
+                body
+            })
+        }),
+
 
     })
 })
 
 
-export const { useGetInterTypeQuery,useGetInterviewQuizzesQuery,useGetIntAndAnsQuery,useGetIntHistoryQuery } = quizhApi
+export const { useGetInterTypeQuery,useGetInterviewQuizzesQuery,useGetIntAndAnsQuery,useGetIntHistoryQuery,useSubmitINTMarksnPointsMutation } = quizhApi

@@ -6,6 +6,7 @@ import Button from 'src/components/shared/Button';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as ImagePicker from 'expo-image-picker';
 import { usePostAllCaseMutation } from 'src/redux/features/case/caseApi';
+import { useCameraPermission } from 'react-native-vision-camera';
 
 const CaseDetailsCreate = () => {
     const navigation = useNavigation()
@@ -22,6 +23,7 @@ const CaseDetailsCreate = () => {
     const [reminderNote, setReminderNote] = useState('')
     const [notes, setNotes] = useState('')
     const [photo, setPhoto] = useState<ImagePicker.ImagePickerAsset | null>(null)
+     const { hasPermission, requestPermission } = useCameraPermission()
 
     // Date picker visibility
     const [showLastUpdatePicker, setShowLastUpdatePicker] = useState(false)
@@ -31,19 +33,46 @@ const CaseDetailsCreate = () => {
     const formatDisplay = (date: Date) =>
         date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' })
 
-    const pickImage = async () => {
-        const permission = await ImagePicker.requestMediaLibraryPermissionsAsync()
-        if (!permission.granted) {
-            Alert.alert("Permission required", "Please allow access to your gallery.")
+    // const pickImage = async () => {
+    //     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync()
+    //     if (!permission.granted) {
+    //         Alert.alert("Permission required", "Please allow access to your gallery.")
+    //         return
+    //     }
+    //     const result = await ImagePicker.launchImageLibraryAsync({
+    //         mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    //         allowsEditing: true,
+    //         quality: 1,
+    //     })
+    //     if (!result.canceled) setPhoto(result.assets[0])
+    // }
+   const handleDocumentPress = () => {
+    Alert.alert("Add Document", "", [
+        { text: "Open Camera", onPress: handleCamera },
+        { text: "Cancel", style: "cancel" },
+    ])
+}
+
+    const handleCamera = async () => {
+    if (hasPermission !== true) {
+        const granted = await requestPermission()
+
+        if (!granted) {
+            Alert.alert("Permission Denied", "Camera access is required.")
             return
         }
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            quality: 1,
-        })
-        if (!result.canceled) setPhoto(result.assets[0])
     }
+
+    navigation.navigate("CameraScreenPro" as never, {
+        onCapture: (uri: string) => {
+            setPhoto({
+                uri,
+                fileName: `doc_${Date.now()}.jpg`,
+                mimeType: 'image/jpeg',
+            })
+        }
+    } as never)
+}
 
     const handleCreate = async () => {
         if (!title) return Alert.alert("Error", "Case title is required.")
@@ -213,11 +242,11 @@ const CaseDetailsCreate = () => {
                 <View className='mb-2'>
                     <View className='flex-row items-center justify-between'>
                         <Text className='text-[#4D4D55] font-robotoBold text-md'>Documents (Optional)</Text>
-                        <TouchableOpacity onPress={pickImage}>
+                        <TouchableOpacity onPress={handleDocumentPress}>
                             <EvilIcons name="plus" size={24} color="#222222" />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={pickImage}>
+                    <TouchableOpacity onPress={handleDocumentPress}>
                         <View className="flex-1 justify-center items-center mt-4 h-[100px] border border-dashed rounded-xl border-gray-300">
                             {photo ? (
                                 <Image

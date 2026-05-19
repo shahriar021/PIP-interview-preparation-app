@@ -54,6 +54,6 @@ const DynamicBaseQRY = async (args: any, api: any, extraOption: any) => {
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: DynamicBaseQRY,
-  tagTypes:['Profile'],
+  tagTypes:['Profile','Case'],
   endpoints: () => ({})
 })

@@ -27,14 +27,13 @@
     "expo-checkbox": "^4.0.0",
     "expo-dev-client": "~5.0.12",
     "expo-document-picker": "~13.0.2",
-    "expo-file-system": "~18.0.11",
     "expo-font": "~13.0.4",
     "expo-image-picker": "~16.0.3",
     "expo-linear-gradient": "^14.0.2",
-    "expo-media-library": "^17.0.6",
+    "expo-media-library": "~17.0.6",
     "expo-notifications": "~0.29.13",
-    "expo-print": "^14.0.3",
-    "expo-sharing": "^13.0.1",
+    "expo-print": "~14.0.3",
+    "expo-sharing": "~13.0.1",
     "expo-status-bar": "~2.0.0",
     "expo-updates": "^0.26.18",
     "i18next": "^26.1.0",
@@ -72,7 +71,8 @@
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
     "sonner-native": "^0.17.0",
-    "victory-native": "^37.3.6"
+    "victory-native": "^37.3.6",
+    "expo-file-system": "~18.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

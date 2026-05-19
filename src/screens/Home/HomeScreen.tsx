@@ -6,7 +6,7 @@ import {
   Image,
 } from "react-native";
 import React from "react";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { scale, verticalScale } from "react-native-size-matters";
 import { useGetAllCaseQuery } from "src/redux/features/case/caseApi";
@@ -50,6 +50,15 @@ const DashboardScreen = ({ navigation }: { navigation: any }) => {
         >
           <Image source={require("../../../assets/pipyrit/globe.png")} style={{ width: 24, height: 24 }} />
           <Text>{currentLabel}</Text>
+        </TouchableOpacity>
+      </View>
+      <View className="flex-row w-full justify-between p-3 items-center">
+        <Text className="font-robotoBold text-[24px] text-[#305FA1]">My Cases</Text>
+        <TouchableOpacity className="flex-row items-center gap-2" onPress={() => navigation.navigate("New Case")}>
+          <View className="bg-[#7E869E40] rounded-lg">
+            <Ionicons name="add-outline" size={24} color={"#083D70"} />
+          </View>
+          <Text className="font-robotoBold text-[#083D70] text-[14px]">Add new case</Text>
         </TouchableOpacity>
       </View>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 150 }}>

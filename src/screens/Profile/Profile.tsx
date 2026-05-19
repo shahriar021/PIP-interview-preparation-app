@@ -62,6 +62,7 @@ export default function YourComponent() {
   const userId = useAppSelector((state) => state.auth.userID)
 
   const { data: getProfile } = useGetProfileQuery(userId)
+  console.log(getProfile)
 
   const SettingsItem = ({ icon, label, onPress }: ProfileItemsProp) => (
     <TouchableOpacity
@@ -122,7 +123,7 @@ export default function YourComponent() {
             {t('tabs.profile')}
           </Text>
           <Text className="font-robotoRegular text-[#ED9400] text-xl">
-            80 {t('points')}
+            {getProfile?.data?.total_points} {t('points')}
           </Text>
         </View>
 

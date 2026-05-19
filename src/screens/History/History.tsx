@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import { useGetQuizHistoryQuery } from 'src/redux/features/quiz/quizApi'
-import { useGetIntAndAnsQuery } from 'src/redux/features/interview/interviewApi'
+import { useGetIntAndAnsQuery, useGetIntHistoryQuery } from 'src/redux/features/interview/interviewApi'
 
 // ── Type ──────────────────────────────────────────────────────────────────────
 type QuizHistoryItem = {
@@ -19,7 +19,7 @@ const History = () => {
     const navigation = useNavigation()
 
     const { data: getQuizHist, isLoading } = useGetQuizHistoryQuery(undefined)
-    const { data: getIntHistory, isLoading:interviewLoading } = useGetIntAndAnsQuery(undefined)
+    const { data: getIntHistory, isLoading:interviewLoading } = useGetIntHistoryQuery(undefined)
 
     // API: { count, results: [...] }
     const quizList: QuizHistoryItem[]      = getQuizHist?.results   ?? []

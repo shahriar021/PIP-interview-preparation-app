@@ -139,7 +139,7 @@ const Interview1 = () => {
             setSelectedOptionId(null)
             setIsAnswered(false)
         } else {
-            navigation.navigate("Quick Result" as never,{totalScore:totalCorrect,rId:resId})
+            navigation.navigate("Interview Result" as never,{totalScore:totalCorrect,rId:resId})
         }
     }
 
@@ -157,7 +157,7 @@ const Interview1 = () => {
         return (
             <View className='flex-1 items-center justify-center bg-white'>
                 <ActivityIndicator size="large" color="#1C75AD" />
-                <Text className='mt-3 text-gray-500 font-robotoRegular'>Loading quiz...</Text>
+                <Text className='mt-3 text-gray-500 font-robotoRegular'>Loading Interview questions...</Text>
             </View>
         )
     }
